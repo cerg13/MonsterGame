@@ -1,0 +1,1 @@
+export { MonsterCodex } from './MonsterCodex';

@@ -1,0 +1,525 @@
+/* Monster Collection Book (Codex) */
+
+.monster-codex {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.codex-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-icon {
+  font-size: 32px;
+}
+
+.header-title h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.collection-stats {
+  display: flex;
+  gap: 32px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-value.highlight {
+  color: #48dbfb;
+  text-shadow: 0 2px 8px rgba(72, 219, 251, 0.4);
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Overall Progress Bar */
+.overall-progress {
+  margin-bottom: 32px;
+}
+
+.progress-bar-track {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: visible;
+}
+
+.progress-bar-fill {
+  position: relative;
+  height: 100%;
+  background: linear-gradient(90deg, #48dbfb, #45aaf2);
+  border-radius: 12px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.progress-milestone {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.milestone-marker {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+}
+
+.progress-milestone.reached .milestone-marker {
+  background: linear-gradient(135deg, #26de81, #20bf6b);
+  border-color: #26de81;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(38, 222, 129, 0.5);
+  animation: milestoneReached 0.6s ease;
+}
+
+@keyframes milestoneReached {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+/* Completion Rewards */
+.completion-rewards {
+  margin-bottom: 32px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.completion-rewards h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.reward-card {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.reward-card.reached {
+  border-color: rgba(38, 222, 129, 0.4);
+  background: rgba(38, 222, 129, 0.1);
+}
+
+.reward-card.claimable {
+  border-color: #fed330;
+  background: rgba(254, 211, 48, 0.1);
+  box-shadow: 0 0 20px rgba(254, 211, 48, 0.3);
+  animation: claimPulse 2s ease infinite;
+}
+
+@keyframes claimPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(254, 211, 48, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(254, 211, 48, 0.5);
+  }
+}
+
+.reward-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.reward-percentage {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.reward-check {
+  font-size: 24px;
+  color: #26de81;
+}
+
+.reward-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.reward-item {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.claim-reward-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #fed330, #f7b731);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.claim-reward-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(254, 211, 48, 0.4);
+}
+
+/* Element Filter */
+.element-filter {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.element-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.element-tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.element-tab.active {
+  background: rgba(72, 219, 251, 0.15);
+  border-color: #48dbfb;
+  box-shadow: 0 4px 16px rgba(72, 219, 251, 0.3);
+}
+
+.element-tab.active[style*="--element-color"] {
+  border-color: var(--element-color);
+  background: color-mix(in srgb, var(--element-color) 15%, transparent);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--element-color) 30%, transparent);
+}
+
+.tab-icon {
+  font-size: 24px;
+}
+
+.tab-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.tab-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Monster Grid */
+.monster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.monster-card {
+  position: relative;
+  aspect-ratio: 0.75;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.monster-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.monster-card.collected {
+  border-color: var(--element-color, rgba(255, 255, 255, 0.3));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--element-color, #fff) 10%, transparent),
+    rgba(255, 255, 255, 0.03)
+  );
+}
+
+.monster-card.collected:hover {
+  border-color: var(--element-color, rgba(255, 255, 255, 0.5));
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--element-color, #000) 40%, transparent);
+}
+
+.monster-card.uncollected {
+  opacity: 0.5;
+}
+
+/* NEW Badge */
+.new-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #fc5c65, #eb3b5a);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(252, 92, 101, 0.5);
+  animation: newBadgePulse 2s ease infinite;
+  z-index: 2;
+}
+
+@keyframes newBadgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Monster Portrait */
+.monster-portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.monster-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.element-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Silhouette */
+.silhouette {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+.silhouette-icon {
+  font-size: 48px;
+  opacity: 0.3;
+}
+
+/* Monster Info */
+.monster-info {
+  text-align: center;
+  width: 100%;
+}
+
+.monster-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.monster-rarity {
+  font-size: 12px;
+}
+
+/* Locked Overlay */
+.locked-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+}
+
+.lock-icon {
+  font-size: 32px;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .monster-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .monster-codex {
+    padding: 16px;
+  }
+
+  .codex-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .collection-stats {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .rewards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .element-filter {
+    gap: 8px;
+  }
+
+  .element-tab {
+    min-width: 80px;
+    padding: 10px 12px;
+  }
+
+  .tab-icon {
+    font-size: 20px;
+  }
+
+  .tab-name {
+    font-size: 11px;
+  }
+
+  .monster-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar-fill,
+  .monster-card,
+  .element-tab,
+  .reward-card {
+    transition: none;
+  }
+
+  .progress-shimmer,
+  .milestone-marker,
+  .new-badge,
+  .claim-reward-btn {
+    animation: none;
+  }
+}

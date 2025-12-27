@@ -13,6 +13,7 @@ import {
 } from '../components/common';
 import { FilterPanel, type MonsterFilters } from '../components/common/FilterPanel';
 import { SearchBar } from '../components/common/SearchBar';
+import { MonsterCodex } from '../components/collection';
 import type { PlayerMonster } from '../types/player';
 import type { Element } from '../types/monster';
 import './MonstersScreen.css';
@@ -33,11 +34,14 @@ const DEFAULT_FILTERS: MonsterFilters = {
   inStorage: 'all',
 };
 
+type TabType = 'monsters' | 'codex';
+
 export const MonstersScreen: React.FC = () => {
   const navigate = useNavigate();
   const { monsters, runes, toggleMonsterLock, removeMonster } = usePlayerStore();
 
   // State
+  const [activeTab, setActiveTab] = useState<TabType>('monsters');
   const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState<MonsterFilters>(DEFAULT_FILTERS);
   const [sortField, setSortField] = useState<SortField>('stars');
@@ -245,12 +249,33 @@ export const MonstersScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* Search */}
-      <SearchBar
-        value={searchQuery}
-        onChange={setSearchQuery}
-        placeholder="Search monsters by name, element..."
-      />
+      {/* Tabs */}
+      <div className="monster-tabs">
+        <button
+          className={`tab-button ${activeTab === 'monsters' ? 'active' : ''}`}
+          onClick={() => setActiveTab('monsters')}
+        >
+          <span className="tab-icon">👾</span>
+          <span>My Monsters</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'codex' ? 'active' : ''}`}
+          onClick={() => setActiveTab('codex')}
+        >
+          <span className="tab-icon">📖</span>
+          <span>Collection Book</span>
+        </button>
+      </div>
+
+      {/* Monsters Tab Content */}
+      {activeTab === 'monsters' && (
+        <>
+          {/* Search */}
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Search monsters by name, element..."
+          />
 
       {/* Toolbar */}
       <div className="monsters-toolbar">
@@ -463,6 +488,13 @@ export const MonstersScreen: React.FC = () => {
             </div>
           </div>
         </Modal>
+      )}
+        </>
+      )}
+
+      {/* Collection Book Tab Content */}
+      {activeTab === 'codex' && (
+        <MonsterCodex />
       )}
     </div>
   );

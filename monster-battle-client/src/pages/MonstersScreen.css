@@ -48,6 +48,48 @@
   font-size: 14px;
 }
 
+/* Monster Tabs */
+.monster-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.tab-button.active {
+  background: linear-gradient(135deg, rgba(72, 219, 251, 0.2), rgba(69, 170, 242, 0.1));
+  border-color: #48dbfb;
+  color: #48dbfb;
+  box-shadow: 0 4px 16px rgba(72, 219, 251, 0.3);
+}
+
+.tab-icon {
+  font-size: 20px;
+}
+
 .back-button:hover {
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);

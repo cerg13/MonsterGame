@@ -14,6 +14,7 @@ import {
 import { FilterPanel, type MonsterFilters } from '../components/common/FilterPanel';
 import { SearchBar } from '../components/common/SearchBar';
 import { MonsterCodex } from '../components/collection';
+import { TeamPresetManager } from '../components/teams';
 import type { PlayerMonster } from '../types/player';
 import type { Element } from '../types/monster';
 import './MonstersScreen.css';
@@ -34,7 +35,7 @@ const DEFAULT_FILTERS: MonsterFilters = {
   inStorage: 'all',
 };
 
-type TabType = 'monsters' | 'codex';
+type TabType = 'monsters' | 'codex' | 'teams';
 
 export const MonstersScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -264,6 +265,13 @@ export const MonstersScreen: React.FC = () => {
         >
           <span className="tab-icon">📖</span>
           <span>Collection Book</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'teams' ? 'active' : ''}`}
+          onClick={() => setActiveTab('teams')}
+        >
+          <span className="tab-icon">📋</span>
+          <span>Team Presets</span>
         </button>
       </div>
 
@@ -495,6 +503,17 @@ export const MonstersScreen: React.FC = () => {
       {/* Collection Book Tab Content */}
       {activeTab === 'codex' && (
         <MonsterCodex />
+      )}
+
+      {/* Team Presets Tab Content */}
+      {activeTab === 'teams' && (
+        <TeamPresetManager
+          currentTeam={selectedMonsters}
+          onLoadTeam={(monsterIds) => {
+            setSelectedMonsters(monsterIds);
+            setActiveTab('monsters');
+          }}
+        />
       )}
     </div>
   );

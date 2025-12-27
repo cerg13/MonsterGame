@@ -1,0 +1,466 @@
+/* Team Preset Manager */
+
+.team-preset-manager {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Header */
+.preset-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-icon {
+  font-size: 28px;
+}
+
+.header-title h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.create-preset-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #48dbfb, #45aaf2);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(72, 219, 251, 0.3);
+}
+
+.create-preset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(72, 219, 251, 0.5);
+}
+
+/* Create Preset Form */
+.create-preset-form {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: rgba(72, 219, 251, 0.1);
+  border: 2px solid rgba(72, 219, 251, 0.3);
+  border-radius: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.current-team-preview {
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.preview-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.preview-monsters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preview-monster {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.monster-element {
+  font-size: 16px;
+}
+
+.empty-team {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+.preset-name-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.preset-name-input:focus {
+  border-color: #48dbfb;
+  box-shadow: 0 0 0 3px rgba(72, 219, 251, 0.2);
+}
+
+.preset-name-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.save-preset-btn {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #26de81, #20bf6b);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-preset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(38, 222, 129, 0.4);
+}
+
+/* Preset List */
+.preset-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty-presets {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+  opacity: 0.3;
+}
+
+.empty-presets p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.empty-hint {
+  font-size: 14px !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Preset Card */
+.preset-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.preset-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.preset-type-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.preset-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.preset-info {
+  margin-bottom: 8px;
+}
+
+.preset-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.preset-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.preset-monsters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.preset-monster {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.monster-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+
+/* Edit Form */
+.edit-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-name-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  outline: none;
+}
+
+.edit-name-input:focus {
+  border-color: #48dbfb;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.save-edit-btn,
+.cancel-edit-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-edit-btn {
+  background: #26de81;
+  color: #ffffff;
+}
+
+.save-edit-btn:hover {
+  background: #20bf6b;
+  transform: scale(1.1);
+}
+
+.cancel-edit-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.cancel-edit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* Preset Actions */
+.preset-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.load-btn,
+.edit-btn,
+.delete-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.load-btn {
+  background: linear-gradient(135deg, #48dbfb, #45aaf2);
+  color: #ffffff;
+}
+
+.load-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(72, 219, 251, 0.4);
+}
+
+.edit-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.edit-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background: rgba(252, 92, 101, 0.2);
+  color: #fc5c65;
+}
+
+.delete-btn:hover {
+  background: rgba(252, 92, 101, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Preset Stats */
+.preset-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.stat-icon {
+  font-size: 28px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .team-preset-manager {
+    padding: 16px;
+  }
+
+  .preset-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .preset-type-icon {
+    font-size: 28px;
+  }
+
+  .preset-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .load-btn,
+  .edit-btn,
+  .delete-btn {
+    flex: 1;
+    padding: 10px 12px;
+  }
+
+  .preset-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .monster-name {
+    max-width: 80px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .preset-card,
+  .create-preset-btn,
+  .save-preset-btn,
+  .load-btn,
+  .edit-btn,
+  .delete-btn {
+    transition: none;
+  }
+
+  .create-preset-form {
+    animation: none;
+  }
+}

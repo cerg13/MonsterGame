@@ -1,0 +1,94 @@
+/* Notification Container - Positioning */
+
+.notification-container {
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.notification-container > * {
+  pointer-events: auto;
+}
+
+/* Position Variants */
+
+/* Top Right (Default) */
+.notification-top-right {
+  top: 24px;
+  right: 24px;
+  align-items: flex-end;
+}
+
+/* Top Left */
+.notification-top-left {
+  top: 24px;
+  left: 24px;
+  align-items: flex-start;
+}
+
+/* Bottom Right */
+.notification-bottom-right {
+  bottom: 24px;
+  right: 24px;
+  align-items: flex-end;
+  flex-direction: column-reverse;
+}
+
+/* Bottom Left */
+.notification-bottom-left {
+  bottom: 24px;
+  left: 24px;
+  align-items: flex-start;
+  flex-direction: column-reverse;
+}
+
+/* Top Center */
+.notification-top-center {
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+/* Bottom Center */
+.notification-bottom-center {
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  flex-direction: column-reverse;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .notification-container {
+    gap: 8px;
+  }
+
+  .notification-top-right,
+  .notification-bottom-right {
+    right: 16px;
+  }
+
+  .notification-top-left,
+  .notification-bottom-left {
+    left: 16px;
+  }
+
+  .notification-top-right,
+  .notification-top-left,
+  .notification-top-center {
+    top: 16px;
+  }
+
+  .notification-bottom-right,
+  .notification-bottom-left,
+  .notification-bottom-center {
+    bottom: 16px;
+  }
+}

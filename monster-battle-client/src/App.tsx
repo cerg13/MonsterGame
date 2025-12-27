@@ -20,6 +20,8 @@ import { MonsterList } from './components/ui/Inventory/MonsterList';
 import { GachaScreen } from './components/ui/GachaScreen';
 import { TutorialOverlay } from './components/tutorial';
 import { AnimatedBackground } from './components/effects/AnimatedBackground';
+import { NotificationProvider } from './contexts/NotificationContext';
+import { NotificationDemo } from './pages/NotificationDemo';
 import { usePlayerStore, useTutorialStore } from './store';
 import { MONSTER_TEMPLATES } from './data/monsters';
 import './App.css';
@@ -115,32 +117,35 @@ function App() {
     }
   }, [player, hasCompletedTutorial, startTutorial]);
   return (
-    <BrowserRouter>
-      <div className="app">
-        <AnimatedBackground variant="default" particleCount={40} intensity="medium" />
-        <Routes>
-          <Route path="/" element={<PageWrapper><MainMenu /></PageWrapper>} />
-          <Route path="/campaign" element={<PageWrapper><CampaignScreen /></PageWrapper>} />
-          <Route path="/battle" element={<PageWrapper><BattleScreen /></PageWrapper>} />
-          <Route path="/monsters" element={<PageWrapper><MonstersScreen /></PageWrapper>} />
-          <Route path="/monsters-old" element={<PageWrapper><MonsterList /></PageWrapper>} />
-          <Route path="/monster/:id" element={<PageWrapper><MonsterDetailScreen /></PageWrapper>} />
-          <Route path="/runes" element={<PageWrapper><ImprovedRuneScreen /></PageWrapper>} />
-          <Route path="/runes-old" element={<PageWrapper><RuneScreen /></PageWrapper>} />
-          <Route path="/summon" element={<PageWrapper><GachaScreen /></PageWrapper>} />
-          <Route path="/arena" element={<PageWrapper><ArenaScreen /></PageWrapper>} />
-          <Route path="/guild" element={<PageWrapper><GuildScreen /></PageWrapper>} />
-          <Route path="/guild-war" element={<PageWrapper><GuildWarScreen /></PageWrapper>} />
-          <Route path="/settings" element={<PageWrapper><SettingsScreen /></PageWrapper>} />
-          <Route path="/daily-rewards" element={<PageWrapper><DailyRewardScreen /></PageWrapper>} />
-          <Route path="/achievements" element={<PageWrapper><AchievementScreen /></PageWrapper>} />
-          <Route path="/quests" element={<PageWrapper><QuestScreen /></PageWrapper>} />
-          <Route path="/dungeons" element={<PageWrapper><DungeonScreen /></PageWrapper>} />
-          <Route path="/loyalty" element={<PageWrapper><LoyaltyScreen /></PageWrapper>} />
-        </Routes>
-        <TutorialOverlay />
-      </div>
-    </BrowserRouter>
+    <NotificationProvider position="top-right" maxNotifications={5}>
+      <BrowserRouter>
+        <div className="app">
+          <AnimatedBackground variant="default" particleCount={40} intensity="medium" />
+          <Routes>
+            <Route path="/" element={<PageWrapper><MainMenu /></PageWrapper>} />
+            <Route path="/campaign" element={<PageWrapper><CampaignScreen /></PageWrapper>} />
+            <Route path="/battle" element={<PageWrapper><BattleScreen /></PageWrapper>} />
+            <Route path="/monsters" element={<PageWrapper><MonstersScreen /></PageWrapper>} />
+            <Route path="/monsters-old" element={<PageWrapper><MonsterList /></PageWrapper>} />
+            <Route path="/monster/:id" element={<PageWrapper><MonsterDetailScreen /></PageWrapper>} />
+            <Route path="/runes" element={<PageWrapper><ImprovedRuneScreen /></PageWrapper>} />
+            <Route path="/runes-old" element={<PageWrapper><RuneScreen /></PageWrapper>} />
+            <Route path="/summon" element={<PageWrapper><GachaScreen /></PageWrapper>} />
+            <Route path="/arena" element={<PageWrapper><ArenaScreen /></PageWrapper>} />
+            <Route path="/guild" element={<PageWrapper><GuildScreen /></PageWrapper>} />
+            <Route path="/guild-war" element={<PageWrapper><GuildWarScreen /></PageWrapper>} />
+            <Route path="/settings" element={<PageWrapper><SettingsScreen /></PageWrapper>} />
+            <Route path="/daily-rewards" element={<PageWrapper><DailyRewardScreen /></PageWrapper>} />
+            <Route path="/achievements" element={<PageWrapper><AchievementScreen /></PageWrapper>} />
+            <Route path="/quests" element={<PageWrapper><QuestScreen /></PageWrapper>} />
+            <Route path="/dungeons" element={<PageWrapper><DungeonScreen /></PageWrapper>} />
+            <Route path="/loyalty" element={<PageWrapper><LoyaltyScreen /></PageWrapper>} />
+            <Route path="/notification-demo" element={<PageWrapper><NotificationDemo /></PageWrapper>} />
+          </Routes>
+          <TutorialOverlay />
+        </div>
+      </BrowserRouter>
+    </NotificationProvider>
   );
 }
 

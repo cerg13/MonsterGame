@@ -1,0 +1,644 @@
+/* Monster Detail Screen Styles */
+
+.monster-detail-screen {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+  padding-bottom: 40px;
+}
+
+/* Header */
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid #3a3a5e;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.back-button:hover {
+  color: #4a90d9;
+}
+
+.header-info {
+  flex: 1;
+  text-align: center;
+}
+
+.header-info h1 {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.header-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.element-badge {
+  font-size: 1.2rem;
+}
+
+.rarity-badge {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.stars {
+  color: #ffd700;
+  font-size: 0.9rem;
+}
+
+.awakened-badge {
+  background: linear-gradient(135deg, #9b59b6, #6c3483);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.header-resources {
+  color: #ffd700;
+  font-size: 0.95rem;
+}
+
+/* Message */
+.message {
+  padding: 12px 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.message.success {
+  background: rgba(76, 175, 80, 0.3);
+  color: #4caf50;
+}
+
+.message.error {
+  background: rgba(244, 67, 54, 0.3);
+  color: #f44336;
+}
+
+/* Portrait Section */
+.monster-portrait-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+}
+
+.portrait-frame {
+  width: 120px;
+  height: 120px;
+  border: 4px solid;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2a2a3e, #1a1a2e);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.portrait-element {
+  font-size: 1.5rem;
+}
+
+.portrait-initial {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.level-info {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.level {
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.exp-bar {
+  width: 150px;
+  height: 6px;
+  background: #2a2a3e;
+  border-radius: 3px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.exp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  transition: width 0.3s ease;
+}
+
+/* Tabs */
+.detail-tabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid #3a3a5e;
+  overflow-x: auto;
+}
+
+.tab {
+  flex: 1;
+  min-width: 80px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab.active {
+  color: #4a90d9;
+  border-bottom-color: #4a90d9;
+}
+
+/* Tab Content */
+.tab-content {
+  padding: 20px;
+}
+
+/* Info Tab */
+.info-tab .description {
+  color: #aaa;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.stats-section h3 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.stat-name {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Skills Tab */
+.skills-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.devilmon-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(139, 69, 19, 0.2);
+  border-radius: 8px;
+  color: #ffa500;
+}
+
+.debug-btn {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #666;
+  border-radius: 6px;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.debug-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.skill-card {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.skill-number {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #4a90d9, #2e5a87);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+}
+
+.skill-title h4 {
+  margin: 0;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.skill-level {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.skill-desc {
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0 0 8px;
+}
+
+.skill-cooldown {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #ff9800;
+  margin-right: 12px;
+}
+
+.skill-multiplier {
+  font-size: 0.8rem;
+  color: #4caf50;
+}
+
+.skill-upgrade {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #3a3a5e;
+}
+
+.upgrade-cost {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.upgrade-btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #9b59b6, #6c3483);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.upgrade-btn:hover:not(:disabled) {
+  box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+}
+
+.upgrade-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.maxed-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+/* Evolution Tab */
+.evolution-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.max-evolution, .already-awakened {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.max-icon, .awakened-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.max-evolution h3, .already-awakened h3 {
+  margin: 0 0 8px;
+  color: #ffd700;
+}
+
+.max-evolution p, .already-awakened p {
+  color: #888;
+  margin: 0;
+}
+
+.evolution-info h3, .awakening-info h3 {
+  margin: 0 0 16px;
+  color: #fff;
+  text-align: center;
+}
+
+.evolution-requirements, .awakening-requirements {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.requirement, .mat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  color: #888;
+}
+
+.requirement.met, .mat-row.met {
+  color: #4caf50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.mat-icon {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
+.mat-name {
+  flex: 1;
+}
+
+.mat-count {
+  font-weight: 500;
+}
+
+.fodder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.fodder-card {
+  background: #2a2a3e;
+  border: 2px solid #3a3a5e;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.fodder-card:hover {
+  border-color: #4a90d9;
+}
+
+.fodder-card.selected {
+  border-color: #4caf50;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.fodder-icon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.fodder-name {
+  font-size: 0.8rem;
+  color: #fff;
+  display: block;
+}
+
+.fodder-level {
+  font-size: 0.7rem;
+  color: #888;
+}
+
+.selected-check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  background: #4caf50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: #fff;
+}
+
+.no-fodder {
+  text-align: center;
+  color: #666;
+  grid-column: 1 / -1;
+  padding: 20px;
+}
+
+.evolve-button, .awaken-button {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.evolve-button {
+  background: linear-gradient(135deg, #ff9800, #e65100);
+  color: #fff;
+}
+
+.awaken-button {
+  background: linear-gradient(135deg, #9b59b6, #6c3483);
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.evolve-button:hover:not(:disabled), .awaken-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.evolve-button:disabled, .awaken-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Awakening Tab */
+.awaken-preview {
+  background: rgba(155, 89, 182, 0.1);
+  border: 1px solid #9b59b6;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.awaken-preview h4, .awakening-requirements h4, .awaken-bonus-display h4 {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  color: #9b59b6;
+}
+
+.bonus-preview, .bonus-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.bonus-value {
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.awaken-bonus-display {
+  margin-top: 24px;
+  background: rgba(155, 89, 182, 0.1);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+/* Runes Tab */
+.runes-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rune-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.rune-slot {
+  aspect-ratio: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #3a3a5e;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+}
+
+.rune-slot.filled {
+  border-color: #4a90d9;
+  background: rgba(74, 144, 217, 0.1);
+}
+
+.rune-slot.empty {
+  border-style: dashed;
+}
+
+.rune-set {
+  font-size: 0.8rem;
+  color: #4a90d9;
+  text-transform: capitalize;
+}
+
+.rune-level {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.rune-stars {
+  font-size: 0.6rem;
+  color: #ffd700;
+}
+
+.slot-number {
+  font-size: 1.5rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.empty-text {
+  font-size: 0.7rem;
+  color: #555;
+}
+
+.manage-runes-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #4a90d9, #2e5a87);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.manage-runes-btn:hover {
+  box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
+}

@@ -1,0 +1,234 @@
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+.tutorial-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.tutorial-highlight {
+  position: absolute;
+  border: 3px solid #feca57;
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 4px rgba(254, 202, 87, 0.3),
+    0 0 20px rgba(254, 202, 87, 0.5);
+  animation: tutorial-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes tutorial-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(254, 202, 87, 0.3),
+      0 0 20px rgba(254, 202, 87, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 0 8px rgba(254, 202, 87, 0.2),
+      0 0 30px rgba(254, 202, 87, 0.7);
+  }
+}
+
+.tutorial-tooltip {
+  position: absolute;
+  background: linear-gradient(145deg, #2d2d4a, #1a1a2e);
+  border: 2px solid #4a4a6a;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 400px;
+  min-width: 320px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  animation: tooltip-appear 0.3s ease-out;
+}
+
+@keyframes tooltip-appear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.tooltip-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #feca57;
+  font-weight: 600;
+}
+
+.skip-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+}
+
+.skip-btn:hover {
+  color: #ff6b6b;
+}
+
+.tooltip-description {
+  color: #e0e0e0;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.tooltip-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.step-indicator {
+  color: #888;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.step-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4a4a6a;
+  transition: all 0.3s ease;
+}
+
+.step-dot.active {
+  background: #feca57;
+  transform: scale(1.25);
+}
+
+.step-dot.completed {
+  background: #1dd1a1;
+}
+
+.tooltip-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.prev-btn,
+.next-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.prev-btn {
+  background: transparent;
+  border: 2px solid #4a4a6a;
+  color: #e0e0e0;
+}
+
+.prev-btn:hover {
+  border-color: #6a6a8a;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.next-btn {
+  background: linear-gradient(145deg, #feca57, #e5b84d);
+  border: none;
+  color: #1a1a2e;
+}
+
+.next-btn:hover {
+  background: linear-gradient(145deg, #ffe066, #feca57);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(254, 202, 87, 0.4);
+}
+
+/* Welcome step special styling */
+.tutorial-tooltip[data-step="welcome"] {
+  text-align: center;
+}
+
+/* Pointer arrow for positioned tooltips */
+.tutorial-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, #2d2d4a 50%, transparent 50%);
+  border: 2px solid #4a4a6a;
+  border-right: none;
+  border-bottom: none;
+}
+
+.tutorial-tooltip[data-position="top"]::before {
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-135deg);
+}
+
+.tutorial-tooltip[data-position="bottom"]::before {
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.tutorial-tooltip[data-position="left"]::before {
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.tutorial-tooltip[data-position="right"]::before {
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .tutorial-tooltip {
+    min-width: 280px;
+    max-width: calc(100vw - 40px);
+    padding: 20px;
+  }
+
+  .tooltip-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .tooltip-description {
+    font-size: 0.9rem;
+  }
+}

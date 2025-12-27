@@ -1,0 +1,53 @@
+{
+  "timestamp": "20251226_093545",
+  "test_results": {
+    "campaign": {
+      "status": "PASS",
+      "elements_found": 64,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_02_campaign_main.png",
+      "details_screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_02_campaign_details.png"
+    },
+    "battle": {
+      "status": "PASS",
+      "buttons_found": 2,
+      "canvas_elements": 0,
+      "has_battle_content": true,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_03_battle_screen.png"
+    },
+    "monsters": {
+      "status": "PASS",
+      "cards_found": 101,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_04_monsters_list.png",
+      "details_screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_04_monster_details.png"
+    },
+    "runes": {
+      "status": "PASS",
+      "cards_found": 11,
+      "control_buttons": 4,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_05_runes_list.png",
+      "details_screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_05_rune_details.png"
+    },
+    "arena": {
+      "status": "PASS",
+      "tabs_found": 11,
+      "cards_found": 32,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_07_arena_screen.png",
+      "tabs_screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_07_arena_tabs.png"
+    },
+    "settings": {
+      "status": "PASS",
+      "tabs_found": 8,
+      "sliders_found": 4,
+      "toggles_found": 0,
+      "selects_found": 0,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_09_settings_screen.png",
+      "tabs_screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093545_09_settings_tabs.png"
+    }
+  },
+  "errors": [
+    "Main Menu test failed: 'charmap' codec can't encode characters in position 30-31: character maps to <undefined>",
+    "Gacha test failed: 'charmap' codec can't encode character '\\u2190' in position 26: character maps to <undefined>",
+    "Guild test failed: 'charmap' codec can't encode character '\\u2190' in position 26: character maps to <undefined>"
+  ],
+  "warnings": []
+}

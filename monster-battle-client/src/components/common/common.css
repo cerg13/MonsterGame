@@ -1,0 +1,754 @@
+/* =============================================
+   Common UI Components Styles
+   ============================================= */
+
+/* ==================== BUTTON ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #434343 0%, #2c2c2c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #535353 0%, #3c3c3c 100%);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(235, 51, 73, 0.3);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+  color: #333;
+  box-shadow: 0 4px 15px rgba(255, 210, 0, 0.3);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #888;
+  border: 2px solid #444;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #666;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 12px;
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+.btn-icon {
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.btn-loading .btn-text {
+  visibility: hidden;
+}
+
+.btn-spinner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==================== PROGRESS BAR ==================== */
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: #1a1a2e;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+}
+
+.progress-bar-hp .progress-bar-fill {
+  background: linear-gradient(90deg, #00c853 0%, #69f0ae 100%);
+}
+
+.progress-bar-hp.low .progress-bar-fill {
+  background: linear-gradient(90deg, #ff5722 0%, #ff9800 100%);
+}
+
+.progress-bar-hp.critical .progress-bar-fill {
+  background: linear-gradient(90deg, #f44336 0%, #e91e63 100%);
+  animation: pulse-danger 1s ease-in-out infinite;
+}
+
+@keyframes pulse-danger {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.progress-bar-exp .progress-bar-fill {
+  background: linear-gradient(90deg, #2196f3 0%, #03a9f4 100%);
+}
+
+.progress-bar-atb .progress-bar-fill {
+  background: linear-gradient(90deg, #ffc107 0%, #ffeb3b 100%);
+}
+
+.progress-bar-mana .progress-bar-fill {
+  background: linear-gradient(90deg, #9c27b0 0%, #e040fb 100%);
+}
+
+.progress-bar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.progress-bar-sm {
+  height: 8px;
+}
+
+.progress-bar-lg {
+  height: 28px;
+}
+
+/* ==================== MODAL ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: linear-gradient(180deg, #2a2a4a 0%, #1a1a2e 100%);
+  border-radius: 16px;
+  padding: 24px;
+  min-width: 320px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: white;
+}
+
+.modal-body {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==================== TOOLTIP ==================== */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  background: #1a1a2e;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease;
+}
+
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tooltip-top {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+}
+
+.tooltip-bottom {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+}
+
+.tooltip-left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 8px;
+}
+
+.tooltip-right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 8px;
+}
+
+/* ==================== BADGE ==================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-fire {
+  background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%);
+  color: white;
+}
+
+.badge-water {
+  background: linear-gradient(135deg, #2196f3 0%, #03a9f4 100%);
+  color: white;
+}
+
+.badge-wind {
+  background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+  color: white;
+}
+
+.badge-light {
+  background: linear-gradient(135deg, #ffc107 0%, #ffeb3b 100%);
+  color: #333;
+}
+
+.badge-dark {
+  background: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%);
+  color: white;
+}
+
+.badge-success {
+  background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+  color: white;
+}
+
+.badge-warning {
+  background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%);
+  color: #333;
+}
+
+.badge-danger {
+  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+  color: white;
+}
+
+.badge-info {
+  background: linear-gradient(135deg, #00bcd4 0%, #26c6da 100%);
+  color: white;
+}
+
+.badge-buff {
+  background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+  color: white;
+  animation: buffPulse 2s ease-in-out infinite;
+}
+
+.badge-debuff {
+  background: linear-gradient(135deg, #f44336 0%, #ef5350 100%);
+  color: white;
+  animation: debuffPulse 2s ease-in-out infinite;
+}
+
+@keyframes buffPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(76, 175, 80, 0); }
+}
+
+@keyframes debuffPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(244, 67, 54, 0); }
+}
+
+/* ==================== PANEL ==================== */
+.panel {
+  background: linear-gradient(180deg, #2a2a4a 0%, #1a1a2e 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.panel-body {
+  padding: 20px;
+}
+
+.panel-footer {
+  padding: 16px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-glow {
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.2);
+}
+
+/* ==================== RESOURCE DISPLAY ==================== */
+.resource-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.resource-icon {
+  font-size: 16px;
+}
+
+.resource-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+.resource-gold .resource-value {
+  color: #ffd700;
+}
+
+.resource-crystal .resource-value {
+  color: #00bcd4;
+}
+
+.resource-energy .resource-value {
+  color: #ff9800;
+}
+
+/* ==================== STAR RATING ==================== */
+.star-rating {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.star {
+  color: #ffd700;
+  text-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
+  font-size: 14px;
+}
+
+.star-empty {
+  color: #444;
+  text-shadow: none;
+}
+
+.star-lg {
+  font-size: 20px;
+}
+
+.star-sm {
+  font-size: 10px;
+}
+
+/* ==================== ELEMENT ICON ==================== */
+.element-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+.element-fire {
+  background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%);
+}
+
+.element-water {
+  background: linear-gradient(135deg, #2196f3 0%, #03a9f4 100%);
+}
+
+.element-wind {
+  background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+}
+
+.element-light {
+  background: linear-gradient(135deg, #ffc107 0%, #ffeb3b 100%);
+}
+
+.element-dark {
+  background: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%);
+}
+
+/* ==================== LOADING SPINNER ==================== */
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-spinner-sm {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.loading-spinner-lg {
+  width: 60px;
+  height: 60px;
+  border-width: 4px;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 9999;
+}
+
+.loading-text {
+  color: white;
+  font-size: 14px;
+}
+
+/* ==================== TABS ==================== */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.tab {
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tab.active {
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* ==================== DIVIDER ==================== */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  margin: 16px 0;
+}
+
+.divider-vertical {
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent);
+  margin: 0 16px;
+}
+
+/* ==================== AVATAR ==================== */
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.avatar-lg {
+  width: 64px;
+  height: 64px;
+  font-size: 28px;
+}
+
+.avatar-rarity-common {
+  border-color: #888888;
+}
+
+.avatar-rarity-rare {
+  border-color: #4a90d9;
+  box-shadow: 0 0 10px rgba(74, 144, 217, 0.3);
+}
+
+.avatar-rarity-sr {
+  border-color: #9b59b6;
+  box-shadow: 0 0 10px rgba(155, 89, 182, 0.3);
+}
+
+.avatar-rarity-ssr {
+  border-color: #f1c40f;
+  box-shadow: 0 0 15px rgba(241, 196, 15, 0.5);
+  animation: ssrGlow 2s ease-in-out infinite;
+}
+
+@keyframes ssrGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(241, 196, 15, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(241, 196, 15, 0.8); }
+}
+
+/* ==================== INPUT ==================== */
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.input::placeholder {
+  color: #666;
+}
+
+.input-error {
+  border-color: #f44336;
+}
+
+.input-success {
+  border-color: #4caf50;
+}
+
+/* ==================== NOTIFICATION ==================== */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.notification-success {
+  background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+}
+
+.notification-error {
+  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+}
+
+.notification-warning {
+  background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%);
+  color: #333;
+}
+
+.notification-info {
+  background: linear-gradient(135deg, #2196f3 0%, #03a9f4 100%);
+}

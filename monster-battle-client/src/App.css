@@ -1,0 +1,368 @@
+/* App Container */
+.app {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ===== PAGE TRANSITIONS ===== */
+
+/* Page wrapper for animations */
+.page-wrapper {
+  animation: pageSlideIn 0.4s ease-out;
+}
+
+.page-wrapper.battle {
+  animation: battleZoomIn 0.6s ease-out;
+}
+
+/* Slide in from right */
+@keyframes pageSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide in from bottom (for modal-like screens) */
+@keyframes pageSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in */
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Battle screen zoom in effect */
+@keyframes battleZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scale in with elastic bounce */
+@keyframes elasticScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== MODAL ANIMATIONS ===== */
+
+/* Modal overlay fade */
+.modal-overlay {
+  animation: modalOverlayFadeIn 0.2s ease-out;
+}
+
+@keyframes modalOverlayFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Modal content elastic bounce */
+.modal-content {
+  animation: modalElasticIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalElasticIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(-20px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+  }
+  80% {
+    transform: scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Modal slide up for mobile */
+.modal-content.slide-up {
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== CARD/ITEM ANIMATIONS ===== */
+
+/* Staggered list item animation */
+.animated-list-item {
+  opacity: 0;
+  animation: listItemSlideIn 0.3s ease-out forwards;
+}
+
+.animated-list-item:nth-child(1) { animation-delay: 0.05s; }
+.animated-list-item:nth-child(2) { animation-delay: 0.1s; }
+.animated-list-item:nth-child(3) { animation-delay: 0.15s; }
+.animated-list-item:nth-child(4) { animation-delay: 0.2s; }
+.animated-list-item:nth-child(5) { animation-delay: 0.25s; }
+.animated-list-item:nth-child(6) { animation-delay: 0.3s; }
+.animated-list-item:nth-child(7) { animation-delay: 0.35s; }
+.animated-list-item:nth-child(8) { animation-delay: 0.4s; }
+
+@keyframes listItemSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card hover lift effect */
+.animated-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.animated-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.animated-card:active {
+  transform: translateY(-2px);
+  transition: transform 0.1s ease;
+}
+
+/* ===== BUTTON ANIMATIONS ===== */
+
+/* Button ripple effect container */
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-animated:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-animated:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Button press animation */
+@keyframes buttonPress {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.btn-press {
+  animation: buttonPress 0.15s ease;
+}
+
+/* ===== NUMBER TICKER ANIMATION ===== */
+
+.number-ticker {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.number-ticker.increasing {
+  animation: numberIncrease 0.3s ease;
+  color: var(--color-success, #1dd1a1);
+}
+
+.number-ticker.decreasing {
+  animation: numberDecrease 0.3s ease;
+  color: var(--color-danger, #ff6b6b);
+}
+
+@keyframes numberIncrease {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes numberDecrease {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
+
+/* ===== TOAST NOTIFICATIONS ===== */
+
+.toast-notification {
+  animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast-notification.exiting {
+  animation: toastSlideOut 0.2s ease-in forwards;
+}
+
+@keyframes toastSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* ===== GLOW ANIMATIONS ===== */
+
+.glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(72, 219, 251, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(72, 219, 251, 0.8), 0 0 30px rgba(72, 219, 251, 0.4);
+  }
+}
+
+/* Skill selection glow */
+.skill-glow {
+  animation: skillGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes skillGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(254, 202, 87, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(254, 202, 87, 0.8), 0 0 25px rgba(254, 202, 87, 0.4);
+  }
+}
+
+/* Legacy page transitions (keep for compatibility) */
+.page-enter {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Loading States */
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--color-bg-dark);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error Boundary */
+.error-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
+  background: var(--color-bg-dark);
+}
+
+.error-screen h2 {
+  color: var(--color-accent);
+  margin-bottom: 10px;
+}
+
+.error-screen p {
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}

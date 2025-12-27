@@ -1,0 +1,342 @@
+.battle-summary-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.battle-summary-panel {
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 25px;
+  max-width: 700px;
+  width: 95%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.summary-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summary-header h2 {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  font-weight: normal;
+}
+
+.battle-outcome {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.summary-header.victory .battle-outcome {
+  color: #1dd1a1;
+  text-shadow: 0 0 20px rgba(29, 209, 161, 0.5);
+}
+
+.summary-header.defeat .battle-outcome {
+  color: #ff6b6b;
+  text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+}
+
+/* Overview stats */
+.summary-overview {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.overview-stat {
+  text-align: center;
+}
+
+.overview-value {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: #48dbfb;
+}
+
+.overview-stat.damage .overview-value {
+  color: #ff6b6b;
+}
+
+.overview-stat.healing .overview-value {
+  color: #1dd1a1;
+}
+
+.overview-stat.taken .overview-value {
+  color: #feca57;
+}
+
+.overview-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Stats section */
+.stats-section {
+  margin-bottom: 20px;
+}
+
+.stats-header {
+  display: grid;
+  grid-template-columns: 140px 1fr 70px 80px 70px;
+  gap: 10px;
+  padding: 8px 10px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.team-label {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px 10px 5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.team-label.player {
+  color: #48dbfb;
+}
+
+.team-label.enemy {
+  color: #ff6b6b;
+}
+
+/* Monster stat row */
+.monster-stat-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  margin: 4px 0;
+  transition: background 0.2s ease;
+}
+
+.monster-stat-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.monster-stat-row.defeated {
+  opacity: 0.6;
+}
+
+.monster-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.element-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.monster-name {
+  font-size: 13px;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.defeated-badge {
+  font-size: 9px;
+  background: #ff6b6b;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+.stat-columns {
+  display: grid;
+  grid-template-columns: 1fr 70px 80px 70px;
+  gap: 10px;
+  align-items: center;
+}
+
+.stat-column {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-column.damage {
+  flex-direction: column;
+}
+
+/* Damage bar */
+.stat-bar-container {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.stat-value {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-value.healing {
+  color: #1dd1a1;
+}
+
+.crit-rate {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 3px;
+}
+
+/* Effects column */
+.stat-column.effects {
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+}
+
+.buff-count {
+  color: #1dd1a1;
+  font-size: 12px;
+}
+
+.debuff-count {
+  color: #ff6b6b;
+  font-size: 12px;
+}
+
+/* Close button */
+.close-summary-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #48dbfb, #0abde3);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.close-summary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(72, 219, 251, 0.4);
+}
+
+.close-summary-btn:active {
+  transform: translateY(0);
+}
+
+/* Scrollbar */
+.battle-summary-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.battle-summary-panel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.battle-summary-panel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .battle-summary-panel {
+    padding: 15px;
+  }
+
+  .stats-header {
+    display: none;
+  }
+
+  .monster-stat-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .stat-columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stat-column {
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .stat-column.damage {
+    grid-column: span 2;
+  }
+
+  .stat-bar-container {
+    flex: 1;
+  }
+
+  .summary-overview {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .overview-stat {
+    flex: 1 1 45%;
+  }
+}

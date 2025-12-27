@@ -1,0 +1,559 @@
+/* Dungeon Reward Screen Styles */
+
+.dungeon-reward-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dungeon-reward-screen.victory {
+  background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+}
+
+.dungeon-reward-screen.defeat {
+  background: radial-gradient(ellipse at center, rgba(231, 76, 60, 0.2) 0%, transparent 70%);
+}
+
+.reward-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: -1;
+}
+
+.reward-content {
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Result Header */
+.result-header {
+  text-align: center;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.result-header.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.result-header h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.victory-text {
+  background: linear-gradient(135deg, #ffd700, #ffaa00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  animation: victoryPulse 1.5s infinite;
+}
+
+@keyframes victoryPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+.defeat-text {
+  color: #e74c3c;
+  text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+}
+
+.dungeon-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 18px;
+}
+
+.dungeon-icon {
+  font-size: 32px;
+}
+
+.dungeon-name {
+  color: #fff;
+  font-weight: 600;
+}
+
+.floor-number {
+  color: #888;
+}
+
+/* Battle Stats */
+.battle-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-out;
+}
+
+.battle-stats.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Basic Rewards (Gold & EXP) */
+.rewards-basic {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-out;
+}
+
+.rewards-basic.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reward-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reward-item.gold {
+  border-color: rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.reward-item.exp {
+  border-color: rgba(102, 126, 234, 0.3);
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.reward-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.reward-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.reward-label {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Runes Section */
+.rewards-runes,
+.rewards-special {
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-out;
+}
+
+.rewards-runes.visible,
+.rewards-special.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rewards-runes h3,
+.rewards-special h3 {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  margin: 0 0 16px 0;
+}
+
+.runes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.rune-reward-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2e 100%);
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s;
+  min-width: 120px;
+  animation: slideInUp 0.4s ease-out backwards;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rune-reward-card:hover {
+  transform: translateY(-4px);
+  border-color: #667eea;
+}
+
+.rune-6star { border-color: rgba(255, 215, 0, 0.5); }
+.rune-5star { border-color: rgba(156, 89, 182, 0.5); }
+.rune-4star { border-color: rgba(52, 152, 219, 0.5); }
+
+.rune-stars {
+  color: #ffd700;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.rune-set-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.rune-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.rune-set {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.rune-slot {
+  font-size: 10px;
+  color: #888;
+}
+
+.rune-main-stat {
+  font-size: 11px;
+  color: #4caf50;
+  font-weight: 500;
+}
+
+/* Special Drops */
+.special-drops-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.special-drop-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2e 100%);
+  border-radius: 12px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  animation: slideInUp 0.4s ease-out backwards;
+}
+
+.special-drop-card.scroll {
+  border-color: rgba(155, 89, 182, 0.5);
+  background: linear-gradient(135deg, #3a2a4a 0%, #2a1a3e 100%);
+}
+
+.special-drop-card.essence {
+  border-color: rgba(52, 152, 219, 0.5);
+}
+
+.special-drop-card.material {
+  border-color: rgba(46, 204, 113, 0.5);
+}
+
+.drop-icon {
+  font-size: 24px;
+}
+
+.drop-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* No Runes Message */
+.no-runes-message {
+  text-align: center;
+  padding: 24px;
+  color: #888;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.no-runes-message.visible {
+  opacity: 1;
+}
+
+/* Action Buttons */
+.reward-actions {
+  margin-top: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease-out;
+}
+
+.reward-actions.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.auto-repeat-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.auto-repeat-progress span {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Rune Detail Modal */
+.rune-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.rune-detail-content {
+  background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2e 100%);
+  border-radius: 16px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  padding: 24px;
+  min-width: 280px;
+  animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rune-detail-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rune-detail-header .rune-stars {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.rune-detail-header .rune-set-name {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+  margin-bottom: 4px;
+}
+
+.rune-detail-header .rune-slot {
+  font-size: 14px;
+  color: #888;
+}
+
+.rune-detail-main {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.rune-detail-main .stat-type {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.rune-detail-main .stat-value {
+  color: #fff;
+  font-weight: 700;
+}
+
+.rune-detail-subs {
+  margin-bottom: 16px;
+}
+
+.rune-detail-subs h4 {
+  font-size: 12px;
+  color: #888;
+  margin: 0 0 12px 0;
+}
+
+.sub-stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sub-stat-row:last-child {
+  border-bottom: none;
+}
+
+.sub-type {
+  color: #ccc;
+}
+
+.sub-value {
+  color: #fff;
+  font-weight: 500;
+}
+
+.no-subs {
+  color: #666;
+  font-style: italic;
+}
+
+.rune-detail-value {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 8px;
+  color: #ffd700;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+/* Scrollbar styling */
+.reward-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reward-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.reward-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .result-header h1 {
+    font-size: 36px;
+  }
+
+  .battle-stats {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .rewards-basic {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .reward-item {
+    padding: 12px 24px;
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "timestamp": "20251226_093449",
+  "test_results": {
+    "campaign": {
+      "status": "PASS",
+      "regions_found": 63,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093449_02_campaign_main.png",
+      "details_screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093449_02_campaign_details.png"
+    },
+    "battle": {
+      "status": "CONDITIONAL",
+      "atb_bars_found": 0,
+      "skill_buttons_found": 0,
+      "auto_toggle_exists": false,
+      "battle_log_exists": false,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093449_03_battle_screen.png",
+      "skill_action_screenshot": null
+    },
+    "monsters": {
+      "status": "PASS",
+      "monster_cards_found": 139,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093449_04_monsters_list.png",
+      "details_screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093449_04_monster_details.png"
+    },
+    "runes": {
+      "status": "PASS",
+      "rune_cards_found": 11,
+      "filters_available": true,
+      "sort_available": false,
+      "screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093449_05_runes_list.png",
+      "details_screenshot": "D:\\coding\\MonsterGame\\test_screenshots\\20251226_093449_05_rune_details.png"
+    }
+  },
+  "errors": [
+    "Main Menu test failed: 'charmap' codec can't encode characters in position 28-29: character maps to <undefined>",
+    "Gacha test failed: Page.query_selector: Unexpected token \"=\" while parsing css selector \"[class*='pity'], text=/pity/i\". Did you mean to CSS.escape it?",
+    "Arena test failed: Page.query_selector: Unexpected token \"=\" while parsing css selector \"[class*='wing'], text=/wing/i\". Did you mean to CSS.escape it?",
+    "Guild test failed: Page.query_selector: Unexpected token \"=\" while parsing css selector \"button[class*='search'], text=/Search Guild/i\". Did you mean to CSS.escape it?",
+    "Settings test failed: 'charmap' codec can't encode character '\\U0001f50a' in position 24: character maps to <undefined>"
+  ],
+  "warnings": []
+}

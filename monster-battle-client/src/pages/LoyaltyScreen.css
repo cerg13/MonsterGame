@@ -1,0 +1,771 @@
+/* Loyalty Screen Styles */
+
+.loyalty-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background Effects */
+.loyalty-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-gradient {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(102, 126, 234, 0.08) 0%, transparent 50%);
+  animation: slowRotate 60s linear infinite;
+}
+
+@keyframes slowRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.bg-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 100px 200px, rgba(255, 215, 0, 0.3), transparent),
+    radial-gradient(2px 2px at 300px 400px, rgba(255, 215, 0, 0.2), transparent),
+    radial-gradient(2px 2px at 500px 150px, rgba(255, 215, 0, 0.25), transparent),
+    radial-gradient(2px 2px at 700px 350px, rgba(255, 215, 0, 0.15), transparent);
+  animation: sparkle 4s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Header */
+.loyalty-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+}
+
+.loyalty-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.back-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lp-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 170, 0, 0.1) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.lp-icon {
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  color: #1a1a2e;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.lp-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+/* VIP Badge */
+.vip-badge-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  gap: 16px;
+}
+
+.vip-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 48px;
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(15, 15, 35, 0.9) 100%);
+  border: 3px solid;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.vip-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.vip-level {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.vip-member {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.vip-progress {
+  width: 100%;
+  max-width: 400px;
+}
+
+.vip-progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.vip-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+}
+
+.vip-progress-text {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
+/* Tabs */
+.loyalty-tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 24px;
+  margin-bottom: 24px;
+}
+
+.tab-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+  padding: 12px 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.tab-button.active {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 170, 0, 0.1) 100%);
+  border-color: rgba(255, 215, 0, 0.3);
+  color: #ffd700;
+}
+
+/* Purchase Message */
+.purchase-message {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 100;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.purchase-message.success {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.9) 0%, rgba(39, 174, 96, 0.9) 100%);
+  color: #fff;
+}
+
+.purchase-message.error {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.9) 0%, rgba(192, 57, 43, 0.9) 100%);
+  color: #fff;
+}
+
+/* Content Area */
+.loyalty-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px 24px;
+}
+
+/* Overview Tab */
+.overview-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Benefits Section */
+.benefits-section,
+.streak-section,
+.test-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.benefits-section h2,
+.streak-section h2,
+.test-section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 16px 0;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  border-radius: 8px;
+}
+
+.benefit-icon {
+  font-size: 24px;
+}
+
+.benefit-text {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Streak Grid */
+.streak-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.streak-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.streak-item.locked {
+  opacity: 0.5;
+}
+
+.streak-item.can-claim {
+  border-color: rgba(255, 215, 0, 0.5);
+  animation: claimPulse 2s infinite;
+}
+
+@keyframes claimPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 0 rgba(255, 215, 0, 0.6);
+  }
+}
+
+.streak-item.claimed {
+  border-color: rgba(46, 204, 113, 0.5);
+  background: rgba(46, 204, 113, 0.1);
+}
+
+.streak-day {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.streak-bonus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #888;
+}
+
+.streak-bonus span {
+  color: #ffd700;
+}
+
+.streak-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #2ecc71;
+  font-size: 20px;
+}
+
+.streak-lock {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 16px;
+}
+
+.claim-streak-btn {
+  margin-top: 12px;
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  border: none;
+  color: #1a1a2e;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.claim-streak-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Test Buttons */
+.test-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.test-btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.test-btn.visit {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+.test-btn.receipt {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: #fff;
+}
+
+.test-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Shop Tab */
+.shop-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.shop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shop-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.discount-badge {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  animation: discountPulse 2s infinite;
+}
+
+@keyframes discountPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.shop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(42, 42, 74, 0.8) 0%, rgba(26, 26, 46, 0.8) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s;
+}
+
+.shop-item:hover:not(.disabled) {
+  border-color: rgba(255, 215, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.shop-item.disabled {
+  opacity: 0.6;
+}
+
+.item-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.item-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.item-description {
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 16px;
+  min-height: 36px;
+}
+
+.item-price {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.original-price {
+  font-size: 14px;
+  color: #666;
+  text-decoration: line-through;
+}
+
+.current-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.item-limit {
+  font-size: 11px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.buy-button {
+  width: 100%;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  border: none;
+  border-radius: 8px;
+  color: #1a1a2e;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.buy-button:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.4);
+}
+
+.buy-button:disabled {
+  background: #444;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* History Tab */
+.history-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.history-tab h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.no-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px;
+  color: #888;
+}
+
+.no-history-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.no-history p {
+  margin: 4px 0;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.history-item.visit {
+  border-left: 3px solid #667eea;
+}
+
+.history-item.receipt {
+  border-left: 3px solid #2ecc71;
+}
+
+.history-item.referral {
+  border-left: 3px solid #9b59b6;
+}
+
+.history-item.review {
+  border-left: 3px solid #f1c40f;
+}
+
+.history-item.social {
+  border-left: 3px solid #e74c3c;
+}
+
+.history-item.birthday {
+  border-left: 3px solid #e91e63;
+}
+
+.history-icon {
+  font-size: 24px;
+  width: 40px;
+  text-align: center;
+}
+
+.history-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-description {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.history-date {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.history-lp {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .streak-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .loyalty-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    flex: 1;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loyalty-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .loyalty-header h1 {
+    order: -1;
+  }
+
+  .vip-badge {
+    padding: 20px 32px;
+  }
+
+  .vip-level {
+    font-size: 24px;
+    letter-spacing: 2px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .test-buttons {
+    flex-direction: column;
+  }
+
+  .test-btn {
+    width: 100%;
+  }
+}

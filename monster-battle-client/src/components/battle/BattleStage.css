@@ -394,6 +394,27 @@
   font-size: 15px;
 }
 
+/* Damage Prediction Container */
+.damage-prediction-container {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  animation: predictionFadeIn 0.3s ease;
+}
+
+@keyframes predictionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Battle Result */
 .battle-result {
   position: absolute;

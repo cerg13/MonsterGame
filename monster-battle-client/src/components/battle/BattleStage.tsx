@@ -25,6 +25,7 @@ import {
 } from '../../utils/animations';
 import { BattleSummary } from './BattleSummary';
 import { DungeonRewardScreen } from '../dungeon';
+import { DamagePrediction } from './DamagePrediction';
 import './BattleStage.css';
 
 interface BattleStageProps {
@@ -1669,6 +1670,29 @@ export const BattleStage: React.FC<BattleStageProps> = ({
                 ))
               )}
             </div>
+
+            {/* Damage Prediction for hovered target */}
+            {!isAllyTargetSkill() && hoveredTarget && selectedSkill && (() => {
+              const activeMonster = battleState?.playerTeam.find(m => m.id === battleState.activeMonster);
+              const targetMonster = getValidTargets().find(m => m.id === hoveredTarget);
+              const skill = getCurrentSkills().find(s => s.skillId === selectedSkill);
+
+              // Check if skill has damage effect
+              const hasDamageEffect = skill?.template.effects.some(e => e.type === 'damage');
+
+              if (activeMonster && targetMonster && skill && hasDamageEffect) {
+                return (
+                  <div className="damage-prediction-container">
+                    <DamagePrediction
+                      attacker={activeMonster}
+                      defender={targetMonster}
+                      skill={skill}
+                    />
+                  </div>
+                );
+              }
+              return null;
+            })()}
           </div>
         )}
 

@@ -1,0 +1,273 @@
+/* Damage Prediction - Enhanced Battle Feedback */
+
+.damage-prediction {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  min-width: 280px;
+  animation: predictionSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes predictionSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Main Damage Display */
+.damage-main {
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.damage-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.damage-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Damage Range */
+.damage-range {
+  margin-bottom: 16px;
+}
+
+.range-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.range-min,
+.range-max {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.range-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.range-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.range-separator {
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+}
+
+/* Prediction Details Grid */
+.prediction-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.detail-item.element-advantage {
+  border-width: 2px;
+}
+
+.detail-icon {
+  font-size: 18px;
+}
+
+.detail-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.detail-item.crit-rate .detail-value {
+  color: #fed330;
+}
+
+.detail-item.crushing .detail-value {
+  color: #26de81;
+}
+
+.detail-item.glancing .detail-value {
+  color: #a4b0be;
+}
+
+/* Helper Text */
+.prediction-helper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(72, 219, 251, 0.1);
+  border: 1px solid rgba(72, 219, 251, 0.2);
+  border-radius: 8px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+}
+
+.helper-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.helper-text {
+  flex: 1;
+}
+
+/* Compact Mode */
+.damage-prediction-compact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.predicted-damage {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.element-indicator {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.crit-indicator {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fed330;
+  padding: 2px 6px;
+  background: rgba(254, 211, 48, 0.15);
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .damage-prediction {
+    min-width: 240px;
+    padding: 14px;
+  }
+
+  .damage-value {
+    font-size: 28px;
+  }
+
+  .range-value {
+    font-size: 14px;
+  }
+
+  .prediction-details {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-item {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .detail-label {
+    flex: 1;
+    text-align: left;
+  }
+}
+
+/* Animations */
+@keyframes predictionPulse {
+  0%, 100% {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    border-color: rgba(72, 219, 251, 0.5);
+  }
+}
+
+.damage-prediction.highlight {
+  animation: predictionPulse 1.5s ease infinite;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .damage-prediction,
+  .damage-prediction-compact,
+  .detail-item {
+    animation: none;
+    transition: none;
+  }
+
+  .damage-prediction.highlight {
+    animation: none;
+    border-color: rgba(72, 219, 251, 0.5);
+  }
+}

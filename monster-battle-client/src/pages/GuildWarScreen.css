@@ -1,0 +1,495 @@
+.guild-war-screen {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #2c1a3e 100%);
+  padding: 20px;
+  color: #fff;
+}
+
+.guild-war-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.guild-war-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gp-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(155, 89, 182, 0.2);
+  border: 2px solid #9b59b6;
+  border-radius: 12px;
+  padding: 8px 16px;
+}
+
+.gp-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #9b59b6;
+}
+
+.gp-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* War Overview */
+.war-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.war-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.guild-card {
+  background: rgba(30, 30, 50, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.guild-card.our-guild {
+  border-color: #3498db;
+}
+
+.guild-card.enemy-guild {
+  border-color: #e74c3c;
+}
+
+.guild-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+}
+
+.guild-tag {
+  display: block;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 15px;
+}
+
+.guild-score {
+  font-size: 36px;
+  font-weight: 700;
+  color: #f1c40f;
+  text-shadow: 0 0 20px rgba(241, 196, 15, 0.5);
+}
+
+.vs-indicator {
+  font-size: 32px;
+  font-weight: 700;
+  color: #e74c3c;
+  text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+}
+
+/* War Stats */
+.war-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.stat-value.success {
+  color: #2ecc71;
+}
+
+.stat-value.danger {
+  color: #e74c3c;
+}
+
+.war-timer {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Quick Stats Grid */
+.quick-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.quick-stat {
+  background: rgba(30, 30, 50, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.quick-stat:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.quick-stat-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.quick-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.quick-stat-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* No War State */
+.no-war {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.no-war-icon {
+  font-size: 80px;
+  display: block;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.no-war h2 {
+  margin: 0 0 15px 0;
+  font-size: 28px;
+}
+
+.no-war p {
+  color: rgba(255, 255, 255, 0.7);
+  margin: 10px 0;
+}
+
+/* Attack Tab */
+.attack-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.defenses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.defense-card {
+  background: rgba(30, 30, 50, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.defense-card:hover {
+  transform: translateY(-5px);
+  border-color: #3498db;
+}
+
+.defense-card.defeated {
+  opacity: 0.5;
+  border-color: rgba(231, 76, 60, 0.5);
+}
+
+.defense-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.defense-position {
+  font-weight: 700;
+  color: #3498db;
+}
+
+.defense-attacks {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.defense-monsters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.defense-monster-preview {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Defense Tab */
+.defense-instruction {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(52, 152, 219, 0.1);
+  border-left: 4px solid #3498db;
+  border-radius: 4px;
+}
+
+.selected-defense {
+  margin-bottom: 30px;
+}
+
+.selected-defense h4 {
+  margin: 0 0 15px 0;
+}
+
+.selected-monsters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.empty-slot {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.selected-monster {
+  background: rgba(52, 152, 219, 0.2);
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selected-monster button {
+  background: rgba(231, 76, 60, 0.3);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.available-monsters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.available-monster {
+  background: rgba(30, 30, 50, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.available-monster:hover {
+  transform: translateY(-3px);
+  border-color: #3498db;
+}
+
+.available-monster.selected {
+  border-color: #2ecc71;
+  background: rgba(46, 204, 113, 0.2);
+}
+
+.monster-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.monster-level {
+  display: block;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.selected-check {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #2ecc71;
+  font-size: 20px;
+}
+
+.my-defenses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.my-defense-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.defense-status {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* History Tab */
+.attacks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attack-entry {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid transparent;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.attack-entry.victory {
+  border-left-color: #2ecc71;
+}
+
+.attack-entry.defeat {
+  border-left-color: #e74c3c;
+}
+
+.attack-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.attack-time {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.attack-defender {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.attack-result {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.attack-points {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f1c40f;
+}
+
+.no-history,
+.no-defenses,
+.no-attacks {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.no-attacks-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .guild-war-screen {
+    padding: 15px;
+  }
+
+  .war-header {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .vs-indicator {
+    display: none;
+  }
+
+  .quick-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .defenses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .selected-monsters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .available-monsters-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

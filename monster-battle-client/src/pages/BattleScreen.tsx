@@ -2,7 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BattleStage } from '../components/battle';
 import { MonsterCard } from '../components/ui/MonsterCard';
-import { useBattleStore, usePlayerStore } from '../store';
+import { DungeonRewardScreen } from '../components/dungeon/DungeonRewardScreen';
+import { useBattleStore, usePlayerStore, useDungeonStore } from '../store';
+import { selectDungeonResult } from '../store/useBattleStore';
 import { monsterTemplates, getMonsterTemplate } from '../data/monsters';
 import { calculateMonsterStats } from '../utils/statCalculator';
 import { useTranslations } from '../localization';
@@ -12,8 +14,10 @@ import './BattleScreen.css';
 export const BattleScreen: React.FC = () => {
   const navigate = useNavigate();
   const t = useTranslations();
-  const { battleState, startBattle, endBattle } = useBattleStore();
+  const { battleState, startBattle, endBattle, clearDungeonResult } = useBattleStore();
+  const dungeonResult = useBattleStore(selectDungeonResult);
   const monsters = usePlayerStore((state) => state.monsters);
+  const { selectedDungeon, selectedFloor } = useDungeonStore();
 
   const [selectedTeam, setSelectedTeam] = useState<string[]>([]);
   const [showTeamSelect, setShowTeamSelect] = useState(!battleState);
@@ -222,8 +226,30 @@ export const BattleScreen: React.FC = () => {
     setSelectedTeam([]);
   };
 
+  const handleDungeonRewardClose = () => {
+    clearDungeonResult();
+    navigate('/dungeons');
+  };
+
+  const handleDungeonRepeat = () => {
+    clearDungeonResult();
+    // Restart the same dungeon battle
+    if (selectedDungeon && selectedFloor) {
+      navigate('/dungeons');
+    }
+  };
+
   return (
     <div className="battle-screen">
+      {/* Dungeon Reward Screen Overlay */}
+      {dungeonResult && (
+        <DungeonRewardScreen
+          result={dungeonResult}
+          onClose={handleDungeonRewardClose}
+          onRepeat={handleDungeonRepeat}
+        />
+      )}
+
       <div className="battle-header">
         <button className="back-button" onClick={() => navigate('/')}>
           ← {t.common.back}

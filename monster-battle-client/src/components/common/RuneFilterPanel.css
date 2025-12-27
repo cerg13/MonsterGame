@@ -1,0 +1,137 @@
+.rune-filter-panel {
+  background: rgba(30, 30, 50, 0.95);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Rune Sets Grid */
+.rune-sets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 8px;
+}
+
+.rune-set-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.rune-set-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.rune-set-btn.active {
+  border-color: var(--set-color);
+  background: var(--set-color);
+  color: #fff;
+  box-shadow: 0 0 10px var(--set-color);
+}
+
+/* Slots Grid */
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.slot-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.slot-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.slot-btn.active {
+  border-color: #3498db;
+  background: rgba(52, 152, 219, 0.3);
+  color: #3498db;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+/* Main Stats Grid */
+.main-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 6px;
+}
+
+.main-stat-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+.main-stat-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.main-stat-btn.active {
+  border-color: #9b59b6;
+  background: rgba(155, 89, 182, 0.3);
+  color: #9b59b6;
+  box-shadow: 0 0 8px rgba(155, 89, 182, 0.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .rune-filter-panel {
+    padding: 15px;
+  }
+
+  .rune-sets-grid {
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    gap: 6px;
+  }
+
+  .rune-set-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .slots-grid {
+    gap: 6px;
+  }
+
+  .slot-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .main-stats-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 5px;
+  }
+
+  .main-stat-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+}

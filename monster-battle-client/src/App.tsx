@@ -14,6 +14,8 @@ import { QuestScreen } from './pages/QuestScreen';
 import { DungeonScreen } from './pages/DungeonScreen';
 import { LoyaltyScreen } from './pages/LoyaltyScreen';
 import { MonstersScreen } from './pages/MonstersScreen';
+import { ImprovedRuneScreen } from './pages/ImprovedRuneScreen';
+import { GuildWarScreen } from './pages/GuildWarScreen';
 import { MonsterList } from './components/ui/Inventory/MonsterList';
 import { GachaScreen } from './components/ui/GachaScreen';
 import { TutorialOverlay } from './components/tutorial';
@@ -120,10 +122,12 @@ function App() {
           <Route path="/monsters" element={<PageWrapper><MonstersScreen /></PageWrapper>} />
           <Route path="/monsters-old" element={<PageWrapper><MonsterList /></PageWrapper>} />
           <Route path="/monster/:id" element={<PageWrapper><MonsterDetailScreen /></PageWrapper>} />
-          <Route path="/runes" element={<PageWrapper><RuneScreen /></PageWrapper>} />
+          <Route path="/runes" element={<PageWrapper><ImprovedRuneScreen /></PageWrapper>} />
+          <Route path="/runes-old" element={<PageWrapper><RuneScreen /></PageWrapper>} />
           <Route path="/summon" element={<PageWrapper><GachaScreen /></PageWrapper>} />
           <Route path="/arena" element={<PageWrapper><ArenaScreen /></PageWrapper>} />
           <Route path="/guild" element={<PageWrapper><GuildScreen /></PageWrapper>} />
+          <Route path="/guild-war" element={<PageWrapper><GuildWarScreen /></PageWrapper>} />
           <Route path="/settings" element={<PageWrapper><SettingsScreen /></PageWrapper>} />
           <Route path="/daily-rewards" element={<PageWrapper><DailyRewardScreen /></PageWrapper>} />
           <Route path="/achievements" element={<PageWrapper><AchievementScreen /></PageWrapper>} />

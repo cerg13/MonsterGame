@@ -69,3 +69,7 @@ export type { MonsterFilters, FilterPanelProps } from './FilterPanel';
 // SearchBar
 export { SearchBar } from './SearchBar';
 export type { SearchBarProps } from './SearchBar';
+
+// RuneFilterPanel
+export { RuneFilterPanel } from './RuneFilterPanel';
+export type { RuneFilters, RuneFilterPanelProps } from './RuneFilterPanel';

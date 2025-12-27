@@ -1,0 +1,429 @@
+/* Spin Wheel Mini-Game */
+
+.spin-wheel-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Header */
+.spin-wheel-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.wheel-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.title-icon {
+  font-size: 36px;
+  animation: iconBounce 2s ease infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.spin-status {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.status-ready {
+  color: #26de81;
+  text-shadow: 0 0 10px rgba(38, 222, 129, 0.5);
+  animation: glow 2s ease infinite;
+}
+
+.status-cooldown {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Wheel Wrapper */
+.wheel-wrapper {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto 40px;
+}
+
+/* Wheel Pointer */
+.wheel-pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.pointer-triangle {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 40px solid #fc5c65;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  animation: pointerBounce 1s ease infinite;
+}
+
+@keyframes pointerBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Wheel */
+.wheel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 10px rgba(255, 255, 255, 0.1),
+    0 0 0 20px rgba(255, 255, 255, 0.05),
+    0 10px 40px rgba(0, 0, 0, 0.5);
+  transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+
+.wheel.spinning {
+  transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+
+/* Prize Sectors */
+.prize-sector {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 0;
+  left: 50%;
+  transform-origin: 0% 100%;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.prize-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transform: rotate(calc(360deg / 8 / 2));
+}
+
+.prize-icon {
+  font-size: 28px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.prize-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 80px;
+}
+
+/* Spin Button */
+.spin-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fc5c65, #eb3b5a);
+  border: 6px solid #ffffff;
+  box-shadow:
+    0 4px 20px rgba(252, 92, 101, 0.5),
+    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 36px;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.spin-button:hover:not(.disabled) {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow:
+    0 6px 30px rgba(252, 92, 101, 0.7),
+    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.spin-button:active:not(.disabled) {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.spin-button.disabled {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    inset 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.spin-text {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* Outer Ring */
+.wheel-outer-ring {
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+/* Won Prize Display */
+.prize-won {
+  position: relative;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(38, 222, 129, 0.2), rgba(32, 191, 107, 0.1));
+  border: 2px solid #26de81;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(38, 222, 129, 0.3);
+  animation: prizeReveal 0.6s ease;
+  overflow: hidden;
+}
+
+@keyframes prizeReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.prize-won-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.won-icon {
+  font-size: 64px;
+  animation: iconSpin 1s ease;
+}
+
+@keyframes iconSpin {
+  0% {
+    transform: rotate(0deg) scale(0);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.won-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.won-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #26de81;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.won-prize {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  animation: confettiFall 3s ease-out forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(500px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Prize List */
+.prize-list {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prize-list-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.prize-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.prize-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.prize-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.prize-item-icon {
+  font-size: 24px;
+}
+
+.prize-item-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.prize-item-chance {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .spin-wheel-container {
+    padding: 16px;
+  }
+
+  .wheel-wrapper {
+    width: 320px;
+    height: 320px;
+  }
+
+  .spin-button {
+    width: 100px;
+    height: 100px;
+    font-size: 28px;
+  }
+
+  .spin-text {
+    font-size: 12px;
+  }
+
+  .prize-icon {
+    font-size: 20px;
+  }
+
+  .prize-name {
+    font-size: 9px;
+    max-width: 60px;
+  }
+
+  .prize-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wheel-title {
+    font-size: 24px;
+  }
+
+  .title-icon {
+    font-size: 28px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .wheel,
+  .spin-button,
+  .prize-item,
+  .prize-won {
+    transition: none;
+  }
+
+  .pointer-triangle,
+  .title-icon,
+  .status-ready,
+  .won-icon,
+  .confetti-piece {
+    animation: none;
+  }
+}

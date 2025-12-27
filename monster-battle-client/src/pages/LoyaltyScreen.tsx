@@ -15,14 +15,16 @@ import {
 import type { VipLevel, LpShopItem } from '../store/useLoyaltyStore';
 import { usePlayerStore } from '../store';
 import { DailyCheckInCalendar } from '../components/loyalty';
+import { SpinWheel } from '../components/minigames';
 import './LoyaltyScreen.css';
 
-type TabType = 'overview' | 'checkin' | 'shop' | 'history';
+type TabType = 'overview' | 'checkin' | 'shop' | 'history' | 'minigames';
 
 export const LoyaltyScreen: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [purchaseMessage, setPurchaseMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [lastSpinDate, setLastSpinDate] = useState<Date | null>(null);
 
   // Loyalty store
   const loyaltyPoints = useLoyaltyStore(selectLoyaltyPoints);
@@ -211,6 +213,12 @@ export const LoyaltyScreen: React.FC = () => {
           onClick={() => setActiveTab('history')}
         >
           History
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'minigames' ? 'active' : ''}`}
+          onClick={() => setActiveTab('minigames')}
+        >
+          🎮 Mini-Games
         </button>
       </div>
 
@@ -422,6 +430,43 @@ export const LoyaltyScreen: React.FC = () => {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Mini-Games Tab */}
+        {activeTab === 'minigames' && (
+          <div className="minigames-tab">
+            <h2 className="tab-title">🎮 Loyalty Mini-Games</h2>
+            <p className="tab-description">
+              Play daily mini-games to earn bonus rewards and LP!
+            </p>
+
+            <div className="minigames-grid">
+              <SpinWheel
+                lastSpinDate={lastSpinDate}
+                onWin={(prize) => {
+                  setLastSpinDate(new Date());
+
+                  // Apply rewards based on prize type
+                  if (player) {
+                    switch (prize.type) {
+                      case 'crystals':
+                        updateResources({ crystals: player.crystals + prize.amount });
+                        break;
+                      case 'gold':
+                        updateResources({ gold: player.gold + prize.amount });
+                        break;
+                      case 'energy':
+                        updateResources({ energy: Math.min(player.energy + prize.amount, player.maxEnergy * 2) });
+                        break;
+                      case 'scroll':
+                        // Add scroll to inventory when system is implemented
+                        break;
+                    }
+                  }
+                }}
+              />
+            </div>
           </div>
         )}
       </div>

@@ -4,6 +4,7 @@ import { useGachaStore, usePlayerStore } from '../../../store';
 import { getMonsterTemplate } from '../../../data/monsters';
 import { MonsterCard } from '../MonsterCard';
 import { useAudio } from '../../../hooks/useAudio';
+import { PityCounter } from '../../gacha';
 import type { GachaPullItem } from '../../../types/gacha';
 import './GachaScreen.css';
 
@@ -214,27 +215,8 @@ export const GachaScreen: React.FC = () => {
             <div className="rate-row"><span>Common (2★)</span><span>31.2%</span></div>
           </div>
 
-          {/* Pity Info */}
-          {pityState && (
-            <div className="pity-info">
-              <h4>Pity System</h4>
-              <div className="pity-bar">
-                <div
-                  className="pity-progress"
-                  style={{ width: `${(pityState.currentPity / 70) * 100}%` }}
-                />
-              </div>
-              <div className="pity-text">
-                {pityState.currentPity} / 70 pulls
-                {pityState.currentPity >= 60 && (
-                  <span className="soft-pity-active"> (Soft Pity Active!)</span>
-                )}
-              </div>
-              {pityState.guaranteedFeatured && (
-                <div className="guaranteed-text">Next 5★ is guaranteed featured!</div>
-              )}
-            </div>
-          )}
+          {/* Pity Counter */}
+          {pityState && <PityCounter pityState={pityState} />}
 
           {/* Pull Buttons */}
           <div className="pull-buttons">

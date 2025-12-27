@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { NotificationToast } from '../components/notifications/NotificationToast';
-import type { Notification, NotificationType, NotificationPriority } from '../components/notifications/NotificationToast';
+import type { Notification, NotificationPriority } from '../components/notifications/NotificationToast';
 import './NotificationContext.css';
 
 interface NotificationContextValue {

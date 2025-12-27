@@ -2,7 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAchievementStore, usePlayerStore, ACHIEVEMENTS, TITLES } from '../store';
 import { useTranslations } from '../localization';
-import type { Achievement, AchievementCategory, AchievementTier } from '../store';
+import { useNotification } from '../contexts/NotificationContext';
+import { AchievementCard } from '../components/achievements';
+import type { AchievementCategory } from '../store';
 import type { Translations } from '../localization';
 import './AchievementScreen.css';
 
@@ -14,118 +16,11 @@ const getCategoryInfo = (t: Translations): Record<AchievementCategory, { name: s
   special: { name: t.achievements.categories.special, icon: '🌟', color: '#a55eea' },
 });
 
-const TIER_COLORS: Record<AchievementTier, string> = {
-  bronze: '#cd7f32',
-  silver: '#c0c0c0',
-  gold: '#ffd700',
-  platinum: '#e5e4e2',
-};
-
-interface AchievementCardProps {
-  achievement: Achievement;
-  onClaim: () => void;
-  t: Translations;
-}
-
-const AchievementCard: React.FC<AchievementCardProps> = ({ achievement, onClaim, t }) => {
-  const progress = useAchievementStore((state) => state.getProgress(achievement.id));
-  const currentValue = progress?.currentValue ?? 0;
-  const isCompleted = progress?.completed ?? false;
-  const isClaimed = progress?.claimed ?? false;
-  const progressPercent = Math.min((currentValue / achievement.targetValue) * 100, 100);
-
-  // Get localized name and description
-  const achievementName = t.achievements.names[achievement.id as keyof typeof t.achievements.names] || achievement.name;
-  const achievementDescription = t.achievements.descriptions[achievement.id as keyof typeof t.achievements.descriptions] || achievement.description;
-
-  // Hide hidden achievements that aren't completed
-  if (achievement.hidden && !isCompleted) {
-    return (
-      <div className="achievement-card hidden">
-        <div className="achievement-icon">❓</div>
-        <div className="achievement-info">
-          <h3 className="achievement-name">{t.achievements.hidden}</h3>
-          <p className="achievement-description">{t.achievements.hiddenDescription}</p>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={`achievement-card ${isCompleted ? 'completed' : ''} ${isClaimed ? 'claimed' : ''}`}>
-      {achievement.tier && (
-        <div
-          className="tier-badge"
-          style={{ backgroundColor: TIER_COLORS[achievement.tier] }}
-        >
-          {t.achievements.tiers[achievement.tier].charAt(0).toUpperCase()}
-        </div>
-      )}
-
-      <div className="achievement-icon">{achievement.icon}</div>
-
-      <div className="achievement-info">
-        <h3 className="achievement-name">{achievementName}</h3>
-        <p className="achievement-description">{achievementDescription}</p>
-
-        <div className="achievement-progress">
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-          <span className="progress-text">
-            {currentValue.toLocaleString()} / {achievement.targetValue.toLocaleString()}
-          </span>
-        </div>
-
-        <div className="achievement-reward">
-          <span className="reward-label">{t.achievements.reward}:</span>
-          <span className="reward-value">
-            {formatReward(achievement.reward, t)}
-          </span>
-        </div>
-      </div>
-
-      {isCompleted && !isClaimed && (
-        <button className="claim-btn" onClick={onClaim}>
-          {t.common.claim}
-        </button>
-      )}
-
-      {isClaimed && (
-        <div className="claimed-badge">
-          <span>✓</span>
-        </div>
-      )}
-    </div>
-  );
-};
-
-function formatReward(reward: Achievement['reward'], t: Translations): string {
-  if (reward.type === 'title' && reward.titleId) {
-    const title = TITLES[reward.titleId];
-    return `${title?.name ?? reward.titleId}`;
-  }
-  const icons: Record<string, string> = {
-    crystals: '💎',
-    gold: '🪙',
-    energy: '⚡',
-    summon_scroll: '📜',
-  };
-  const resourceNames: Record<string, string> = {
-    crystals: t.resources.crystals,
-    gold: t.resources.gold,
-    energy: t.resources.energy,
-    summon_scroll: t.resources.summonScrolls,
-  };
-  return `${icons[reward.type] || ''} ${reward.amount?.toLocaleString() ?? ''} ${resourceNames[reward.type] || reward.type}`;
-}
 
 export const AchievementScreen: React.FC = () => {
   const navigate = useNavigate();
   const t = useTranslations();
+  const { achievement: achievementNotif } = useNotification();
   const [selectedCategory, setSelectedCategory] = useState<AchievementCategory | 'all'>('all');
   const [showCompleted, setShowCompleted] = useState(true);
 
@@ -135,6 +30,7 @@ export const AchievementScreen: React.FC = () => {
     getTotalCount,
     getUnclaimedCount,
     getCategoryProgress,
+    getProgress,
   } = useAchievementStore();
 
   const { player, updateResources } = usePlayerStore();
@@ -161,21 +57,43 @@ export const AchievementScreen: React.FC = () => {
     const reward = claimReward(achievementId);
     if (!reward || !player) return;
 
+    // Get achievement for notification
+    const achievement = ACHIEVEMENTS.find((a) => a.id === achievementId);
+    const achievementName = achievement?.name || 'Achievement';
+
     // Apply reward to player
+    let rewardText = '';
     switch (reward.type) {
       case 'crystals':
         updateResources({ crystals: player.crystals + (reward.amount ?? 0) });
+        rewardText = `${reward.amount} 💎 Crystals`;
         break;
       case 'gold':
         updateResources({ gold: player.gold + (reward.amount ?? 0) });
+        rewardText = `${reward.amount?.toLocaleString()} 💰 Gold`;
         break;
       case 'energy':
         updateResources({ energy: Math.min(player.energy + (reward.amount ?? 0), player.maxEnergy * 2) });
+        rewardText = `${reward.amount} ⚡ Energy`;
         break;
-      // summon_scroll and title rewards need inventory/profile system
+      case 'summon_scroll':
+        rewardText = `${reward.amount} 📜 Summon Scroll`;
+        break;
+      case 'title':
+        const title = reward.titleId ? TITLES[reward.titleId] : null;
+        rewardText = `Title: ${title?.name || reward.titleId}`;
+        break;
       default:
+        rewardText = 'Reward';
         break;
     }
+
+    // Show achievement notification
+    achievementNotif(`Claimed: ${achievementName} - ${rewardText}`, {
+      title: '🎁 Achievement Claimed!',
+      duration: 5000,
+      priority: 'high',
+    });
   };
 
   const completedCount = getCompletedCount();
@@ -267,8 +185,8 @@ export const AchievementScreen: React.FC = () => {
             <AchievementCard
               key={achievement.id}
               achievement={achievement}
+              progress={getProgress(achievement.id)}
               onClaim={() => handleClaim(achievement.id)}
-              t={t}
             />
           ))
         )}

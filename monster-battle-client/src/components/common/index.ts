@@ -61,3 +61,11 @@ export { Divider } from './Divider';
 
 // SkillIcon
 export { SkillIcon } from './SkillIcon';
+
+// FilterPanel
+export { FilterPanel } from './FilterPanel';
+export type { MonsterFilters, FilterPanelProps } from './FilterPanel';
+
+// SearchBar
+export { SearchBar } from './SearchBar';
+export type { SearchBarProps } from './SearchBar';

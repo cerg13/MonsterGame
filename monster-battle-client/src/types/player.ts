@@ -1,6 +1,9 @@
 import type { PlayerMonster } from './monster';
 import type { ArenaTier } from './arena';
 
+// Re-export for convenience
+export type { PlayerMonster };
+
 // Player profile
 export interface Player {
   id: string;

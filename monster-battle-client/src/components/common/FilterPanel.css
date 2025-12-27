@@ -1,0 +1,226 @@
+.filter-panel {
+  background: rgba(30, 30, 50, 0.95);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section:last-child {
+  margin-bottom: 0;
+}
+
+.filter-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 10px;
+}
+
+/* Elements filter */
+.filter-elements {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.element-filter {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.element-filter:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.element-filter.active {
+  border-color: var(--primary-color, #3498db);
+  background: rgba(52, 152, 219, 0.2);
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+/* Rarities filter */
+.filter-rarities {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rarity-filter {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.rarity-filter:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.rarity-filter.common {
+  border-color: #95a5a6;
+}
+
+.rarity-filter.rare {
+  border-color: #3498db;
+}
+
+.rarity-filter.sr {
+  border-color: #9b59b6;
+}
+
+.rarity-filter.ssr {
+  border-color: #f39c12;
+}
+
+.rarity-filter.active {
+  box-shadow: 0 0 10px currentColor;
+}
+
+.rarity-filter.common.active {
+  background: rgba(149, 165, 166, 0.2);
+  color: #95a5a6;
+}
+
+.rarity-filter.rare.active {
+  background: rgba(52, 152, 219, 0.2);
+  color: #3498db;
+}
+
+.rarity-filter.sr.active {
+  background: rgba(155, 89, 182, 0.2);
+  color: #9b59b6;
+}
+
+.rarity-filter.ssr.active {
+  background: rgba(243, 156, 18, 0.2);
+  color: #f39c12;
+}
+
+/* Range filter */
+.filter-range {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.range-input:focus {
+  outline: none;
+  border-color: var(--primary-color, #3498db);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.range-separator {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+}
+
+/* Toggles */
+.filter-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-select:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color, #3498db);
+}
+
+.filter-select option {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .filter-panel {
+    padding: 15px;
+  }
+
+  .filter-elements {
+    gap: 8px;
+  }
+
+  .element-filter {
+    padding: 6px;
+  }
+
+  .filter-rarities {
+    gap: 8px;
+  }
+
+  .rarity-filter {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .range-input {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .filter-select {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}

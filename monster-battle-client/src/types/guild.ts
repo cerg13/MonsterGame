@@ -104,6 +104,25 @@ export interface GuildWarAttack {
   timestamp: Date;
 }
 
+// Guild defense setup
+export interface GuildDefense {
+  guildId: string;
+  playerId: string;
+  position: number;
+  monsters: string[];
+  defeatedBy: string | null;
+  attackCount: number;
+}
+
+// Guild war stats
+export interface GuildWarStats {
+  swordsUsed: number;
+  maxSwords: number;
+  victories: number;
+  defeats: number;
+  totalPoints: number;
+}
+
 // Guild shop item
 export interface GuildShopItem {
   id: string;

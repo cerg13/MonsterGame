@@ -13,6 +13,7 @@ import { AchievementScreen } from './pages/AchievementScreen';
 import { QuestScreen } from './pages/QuestScreen';
 import { DungeonScreen } from './pages/DungeonScreen';
 import { LoyaltyScreen } from './pages/LoyaltyScreen';
+import { MonstersScreen } from './pages/MonstersScreen';
 import { MonsterList } from './components/ui/Inventory/MonsterList';
 import { GachaScreen } from './components/ui/GachaScreen';
 import { TutorialOverlay } from './components/tutorial';
@@ -116,7 +117,8 @@ function App() {
           <Route path="/" element={<PageWrapper><MainMenu /></PageWrapper>} />
           <Route path="/campaign" element={<PageWrapper><CampaignScreen /></PageWrapper>} />
           <Route path="/battle" element={<PageWrapper><BattleScreen /></PageWrapper>} />
-          <Route path="/monsters" element={<PageWrapper><MonsterList /></PageWrapper>} />
+          <Route path="/monsters" element={<PageWrapper><MonstersScreen /></PageWrapper>} />
+          <Route path="/monsters-old" element={<PageWrapper><MonsterList /></PageWrapper>} />
           <Route path="/monster/:id" element={<PageWrapper><MonsterDetailScreen /></PageWrapper>} />
           <Route path="/runes" element={<PageWrapper><RuneScreen /></PageWrapper>} />
           <Route path="/summon" element={<PageWrapper><GachaScreen /></PageWrapper>} />

@@ -15,7 +15,7 @@ import {
 import type { VipLevel, LpShopItem } from '../store/useLoyaltyStore';
 import { usePlayerStore } from '../store';
 import { DailyCheckInCalendar } from '../components/loyalty';
-import { SpinWheel } from '../components/minigames';
+import { SpinWheel, ScratchCard } from '../components/minigames';
 import './LoyaltyScreen.css';
 
 type TabType = 'overview' | 'checkin' | 'shop' | 'history' | 'minigames';
@@ -25,6 +25,7 @@ export const LoyaltyScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('overview');
   const [purchaseMessage, setPurchaseMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [lastSpinDate, setLastSpinDate] = useState<Date | null>(null);
+  const [lastScratchDate, setLastScratchDate] = useState<Date | null>(null);
 
   // Loyalty store
   const loyaltyPoints = useLoyaltyStore(selectLoyaltyPoints);
@@ -446,6 +447,31 @@ export const LoyaltyScreen: React.FC = () => {
                 lastSpinDate={lastSpinDate}
                 onWin={(prize) => {
                   setLastSpinDate(new Date());
+
+                  // Apply rewards based on prize type
+                  if (player) {
+                    switch (prize.type) {
+                      case 'crystals':
+                        updateResources({ crystals: player.crystals + prize.amount });
+                        break;
+                      case 'gold':
+                        updateResources({ gold: player.gold + prize.amount });
+                        break;
+                      case 'energy':
+                        updateResources({ energy: Math.min(player.energy + prize.amount, player.maxEnergy * 2) });
+                        break;
+                      case 'scroll':
+                        // Add scroll to inventory when system is implemented
+                        break;
+                    }
+                  }
+                }}
+              />
+
+              <ScratchCard
+                lastPlayDate={lastScratchDate}
+                onWin={(prize) => {
+                  setLastScratchDate(new Date());
 
                   // Apply rewards based on prize type
                   if (player) {

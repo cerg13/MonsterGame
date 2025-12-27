@@ -1,0 +1,480 @@
+/* Scratch Card Game */
+
+.scratch-card-game {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Header */
+.scratch-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-icon {
+  font-size: 32px;
+}
+
+.header-title h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.scratch-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.info-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cooldown-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fc5c65;
+  padding: 6px 12px;
+  background: rgba(252, 92, 101, 0.2);
+  border-radius: 8px;
+}
+
+/* Prize Won Banner */
+.prize-won-banner {
+  position: relative;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(72, 219, 251, 0.2), rgba(165, 94, 234, 0.2));
+  border: 3px solid;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+  animation: prizeReveal 0.5s ease;
+}
+
+@keyframes prizeReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.confetti-burst {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #fed330, #f7b731, #48dbfb, #45aaf2, #fc5c65, #a55eea);
+  animation: confettiFall 2s ease-out forwards;
+}
+
+.confetti-piece:nth-child(odd) {
+  border-radius: 50%;
+}
+
+.confetti-piece:nth-child(even) {
+  border-radius: 2px;
+}
+
+.confetti-piece:nth-child(1) { top: 0%; left: 10%; animation-delay: 0s; }
+.confetti-piece:nth-child(2) { top: 0%; left: 20%; animation-delay: 0.1s; }
+.confetti-piece:nth-child(3) { top: 0%; left: 30%; animation-delay: 0.05s; }
+.confetti-piece:nth-child(4) { top: 0%; left: 40%; animation-delay: 0.15s; }
+.confetti-piece:nth-child(5) { top: 0%; left: 50%; animation-delay: 0.2s; }
+.confetti-piece:nth-child(6) { top: 0%; left: 60%; animation-delay: 0.1s; }
+.confetti-piece:nth-child(7) { top: 0%; left: 70%; animation-delay: 0.05s; }
+.confetti-piece:nth-child(8) { top: 0%; left: 80%; animation-delay: 0.15s; }
+.confetti-piece:nth-child(9) { top: 0%; left: 90%; animation-delay: 0s; }
+.confetti-piece:nth-child(n+10) {
+  top: 0%;
+  left: calc(10% + (var(--i) * 9%));
+  animation-delay: calc(var(--i) * 0.05s);
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.won-icon {
+  font-size: 80px;
+  flex-shrink: 0;
+  animation: wonBounce 0.6s ease;
+}
+
+@keyframes wonBounce {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.1); }
+}
+
+.won-text {
+  flex: 1;
+}
+
+.won-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.won-prize {
+  font-size: 28px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Scratch Panels */
+.scratch-panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.scratch-panel {
+  position: relative;
+  aspect-ratio: 1;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.scratch-panel:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.scratch-panel.scratched {
+  animation: panelReveal 0.3s ease;
+}
+
+@keyframes panelReveal {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.panel-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-symbol {
+  font-size: 48px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.scratch-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  touch-action: none;
+  z-index: 1;
+}
+
+.scratch-canvas:active {
+  cursor: grabbing;
+}
+
+/* Rules */
+.scratch-rules {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.scratch-rules h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+}
+
+.scratch-rules p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+/* Symbol Guide */
+.symbol-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.symbol-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.symbol-icon {
+  font-size: 24px;
+  width: 32px;
+  text-align: center;
+}
+
+.symbol-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.symbol-rarity {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Actions */
+.scratch-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.reveal-btn,
+.new-card-btn {
+  flex: 1;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reveal-btn {
+  background: linear-gradient(135deg, #48dbfb, #45aaf2);
+  box-shadow: 0 4px 12px rgba(72, 219, 251, 0.3);
+}
+
+.reveal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(72, 219, 251, 0.5);
+}
+
+.new-card-btn {
+  background: linear-gradient(135deg, #26de81, #20bf6b);
+  box-shadow: 0 4px 12px rgba(38, 222, 129, 0.3);
+}
+
+.new-card-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(38, 222, 129, 0.5);
+}
+
+.new-card-btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Stats */
+.scratch-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.stat-icon {
+  font-size: 28px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scratch-card-game {
+    padding: 16px;
+  }
+
+  .scratch-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .scratch-info {
+    align-items: flex-start;
+  }
+
+  .scratch-panels {
+    gap: 8px;
+  }
+
+  .panel-symbol {
+    font-size: 36px;
+  }
+
+  .won-icon {
+    font-size: 60px;
+  }
+
+  .won-title {
+    font-size: 18px;
+  }
+
+  .won-prize {
+    font-size: 22px;
+  }
+
+  .scratch-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .scratch-actions {
+    flex-direction: column;
+  }
+
+  .symbol-guide {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-icon {
+    font-size: 24px;
+  }
+
+  .header-title h3 {
+    font-size: 20px;
+  }
+
+  .scratch-panels {
+    gap: 6px;
+  }
+
+  .panel-symbol {
+    font-size: 28px;
+  }
+
+  .prize-won-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .won-icon {
+    font-size: 50px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .scratch-panel,
+  .reveal-btn,
+  .new-card-btn,
+  .prize-won-banner,
+  .won-icon {
+    transition: none;
+    animation: none;
+  }
+
+  .confetti-piece {
+    display: none;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .scratch-panel {
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .scratch-rules {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .symbol-item {
+    background: rgba(0, 0, 0, 0.4);
+  }
+}

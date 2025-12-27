@@ -19,9 +19,11 @@ import { GuildWarScreen } from './pages/GuildWarScreen';
 import { MonsterList } from './components/ui/Inventory/MonsterList';
 import { GachaScreen } from './components/ui/GachaScreen';
 import { TutorialOverlay } from './components/tutorial';
+import { AnimatedBackground } from './components/effects/AnimatedBackground';
 import { usePlayerStore, useTutorialStore } from './store';
 import { MONSTER_TEMPLATES } from './data/monsters';
 import './App.css';
+import './styles/enhanced-theme.css';
 
 // Page wrapper component for transitions
 interface PageWrapperProps {
@@ -115,6 +117,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app">
+        <AnimatedBackground variant="default" particleCount={40} intensity="medium" />
         <Routes>
           <Route path="/" element={<PageWrapper><MainMenu /></PageWrapper>} />
           <Route path="/campaign" element={<PageWrapper><CampaignScreen /></PageWrapper>} />

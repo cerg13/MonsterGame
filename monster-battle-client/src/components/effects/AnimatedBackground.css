@@ -1,0 +1,106 @@
+.animated-background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.animated-background-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.animated-background-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+}
+
+.animated-background-gradient[data-variant="default"] {
+  background: radial-gradient(
+    ellipse at top,
+    rgba(72, 219, 251, 0.15) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    ellipse at bottom,
+    rgba(165, 94, 234, 0.15) 0%,
+    transparent 50%
+  );
+}
+
+.animated-background-gradient[data-variant="fire"] {
+  background: radial-gradient(
+    ellipse at top right,
+    rgba(252, 92, 101, 0.2) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    ellipse at bottom left,
+    rgba(253, 150, 68, 0.2) 0%,
+    transparent 50%
+  );
+}
+
+.animated-background-gradient[data-variant="water"] {
+  background: radial-gradient(
+    ellipse at top left,
+    rgba(72, 219, 251, 0.2) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    ellipse at bottom right,
+    rgba(69, 170, 242, 0.2) 0%,
+    transparent 50%
+  );
+}
+
+.animated-background-gradient[data-variant="wind"] {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(38, 222, 129, 0.2) 0%,
+    transparent 50%
+  );
+}
+
+.animated-background-gradient[data-variant="light"] {
+  background: radial-gradient(
+    ellipse at top,
+    rgba(254, 211, 48, 0.2) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    ellipse at bottom,
+    rgba(247, 183, 49, 0.15) 0%,
+    transparent 50%
+  );
+}
+
+.animated-background-gradient[data-variant="dark"] {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(165, 94, 234, 0.2) 0%,
+    transparent 50%
+  );
+}
+
+/* Performance optimization for low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .animated-background-canvas {
+    display: none;
+  }
+
+  .animated-background-gradient {
+    opacity: 0.15;
+  }
+}

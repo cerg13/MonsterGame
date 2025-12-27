@@ -1,0 +1,694 @@
+/* Skill Effects - Epic Battle Animations */
+
+.skill-effect {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+}
+
+/* Attack Effect */
+.attack-effect {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.attack-effect.phase-charging .projectile {
+  animation: chargeUp 0.3s ease-out;
+}
+
+.attack-effect.phase-casting .projectile {
+  animation: projectileFly 0.5s ease-in-out;
+}
+
+.projectile {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  filter: brightness(1.2);
+}
+
+.projectile-trail {
+  position: absolute;
+  width: 60px;
+  height: 8px;
+  left: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 4px;
+  opacity: 0.6;
+  filter: blur(4px);
+}
+
+@keyframes chargeUp {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes projectileFly {
+  0% {
+    transform: translateX(-100px) scale(1);
+  }
+  100% {
+    transform: translateX(0) scale(1.2);
+  }
+}
+
+.impact-burst {
+  position: absolute;
+  inset: 0;
+  animation: impactExpand 0.3s ease-out;
+}
+
+.impact-particle {
+  position: absolute;
+  width: 40px;
+  height: 4px;
+  left: 50%;
+  top: 50%;
+  margin-left: -20px;
+  margin-top: -2px;
+  border-radius: 2px;
+  animation: burstParticle 0.4s ease-out forwards;
+}
+
+@keyframes impactExpand {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes burstParticle {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(60px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* AOE Effect */
+.aoe-effect {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.aoe-ring-1,
+.aoe-ring-2,
+.aoe-ring-3 {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid;
+}
+
+.aoe-effect.phase-charging .aoe-ring-1 {
+  inset: 45%;
+  animation: aoeExpand 0.3s ease-out forwards;
+}
+
+.aoe-effect.phase-casting .aoe-ring-2 {
+  inset: 30%;
+  animation: aoeExpand 0.4s ease-out forwards;
+  animation-delay: 0.1s;
+}
+
+.aoe-effect.phase-casting .aoe-ring-3 {
+  inset: 15%;
+  animation: aoeExpand 0.5s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes aoeExpand {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.aoe-center {
+  position: absolute;
+  inset: 40%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  animation: aoePulse 0.6s ease-in-out;
+}
+
+@keyframes aoePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.aoe-shockwave {
+  position: absolute;
+  inset: -10%;
+  border-radius: 50%;
+  border: 5px solid;
+  animation: shockwave 0.5s ease-out;
+}
+
+@keyframes shockwave {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Heal Effect */
+.heal-effect {
+  position: relative;
+  width: 200px;
+  height: 250px;
+}
+
+.heal-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  animation: healPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes healPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+.heal-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.heal-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  left: 50%;
+  bottom: 20%;
+  margin-left: -4px;
+  animation: healRise 1.5s ease-out infinite;
+}
+
+@keyframes healRise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-150px) translateX(var(--drift, 0));
+    opacity: 0;
+  }
+}
+
+.heal-particle:nth-child(odd) {
+  --drift: 20px;
+}
+
+.heal-particle:nth-child(even) {
+  --drift: -20px;
+}
+
+.heal-wave {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  animation: healWaveExpand 0.6s ease-out;
+}
+
+@keyframes healWaveExpand {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Buff Effect */
+.buff-effect {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.buff-aura {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  animation: buffGlow 1s ease-in-out infinite;
+}
+
+@keyframes buffGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.8;
+  }
+}
+
+.buff-sparkles {
+  position: absolute;
+  inset: 0;
+}
+
+.buff-sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: buffSparkle 1.2s ease-out infinite;
+}
+
+@keyframes buffSparkle {
+  0% {
+    transform: scale(0) translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(-50px);
+    opacity: 0;
+  }
+}
+
+.buff-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  animation: buffBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes buffBounce {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Debuff Effect */
+.debuff-effect {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.debuff-cloud {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  animation: debuffPulse 1s ease-in-out infinite;
+  filter: blur(8px);
+}
+
+@keyframes debuffPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+}
+
+.debuff-drops {
+  position: absolute;
+  inset: 0;
+}
+
+.debuff-drop {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  top: 20%;
+  animation: debuffDrop 1s ease-in infinite;
+}
+
+@keyframes debuffDrop {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
+.debuff-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  animation: debuffShake 0.5s ease-in-out infinite;
+}
+
+@keyframes debuffShake {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(-5deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(5deg);
+  }
+}
+
+/* Critical Effect */
+.critical-effect {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.critical-flash {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: criticalFlash 0.3s ease-out;
+}
+
+@keyframes criticalFlash {
+  0%, 100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+.critical-lightning {
+  position: absolute;
+  inset: 0;
+}
+
+.lightning-bolt {
+  position: absolute;
+  width: 8px;
+  height: 100%;
+  left: 50%;
+  margin-left: -4px;
+  clip-path: polygon(40% 0%, 60% 0%, 50% 40%, 70% 40%, 40% 100%, 50% 60%, 30% 60%);
+  animation: lightningStrike 0.4s ease-out;
+}
+
+.lightning-bolt.bolt-2 {
+  transform: rotate(45deg);
+  animation-delay: 0.1s;
+}
+
+@keyframes lightningStrike {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  20%, 40%, 60%, 80% {
+    opacity: 1;
+  }
+  10%, 30%, 50%, 70%, 90% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(1);
+  }
+}
+
+.critical-text {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  font-weight: 900;
+  color: #fed330;
+  text-shadow: 0 0 20px #fed330,
+               0 4px 8px rgba(0, 0, 0, 0.8);
+  animation: criticalTextBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes criticalTextBounce {
+  0% {
+    transform: translateX(-50%) scale(0) rotate(-10deg);
+  }
+  60% {
+    transform: translateX(-50%) scale(1.2) rotate(5deg);
+  }
+  100% {
+    transform: translateX(-50%) scale(1) rotate(0deg);
+  }
+}
+
+.critical-stars {
+  position: absolute;
+  inset: 0;
+}
+
+.critical-star {
+  position: absolute;
+  font-size: 24px;
+  animation: criticalStarBurst 0.8s ease-out forwards;
+}
+
+.critical-star:nth-child(1) { top: 30%; left: 20%; }
+.critical-star:nth-child(2) { top: 25%; right: 25%; }
+.critical-star:nth-child(3) { bottom: 35%; left: 15%; }
+.critical-star:nth-child(4) { bottom: 30%; right: 20%; }
+.critical-star:nth-child(5) { top: 50%; left: 50%; }
+
+@keyframes criticalStarBurst {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Ultimate Effect */
+.ultimate-effect {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.ultimate-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  animation: ultimateCore 1s ease-out;
+  z-index: 2;
+}
+
+@keyframes ultimateCore {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.ultimate-rings {
+  position: absolute;
+  inset: 0;
+}
+
+.ultimate-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 4px solid;
+}
+
+.ultimate-ring.ring-1 {
+  inset: 10%;
+  animation: ultimateRing 1.5s ease-out infinite;
+}
+
+.ultimate-ring.ring-2 {
+  inset: 20%;
+  animation: ultimateRing 1.5s ease-out infinite;
+  animation-delay: 0.2s;
+}
+
+.ultimate-ring.ring-3 {
+  inset: 30%;
+  animation: ultimateRing 1.5s ease-out infinite;
+  animation-delay: 0.4s;
+}
+
+@keyframes ultimateRing {
+  0% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.ultimate-explosion {
+  position: absolute;
+  inset: -50%;
+  border-radius: 50%;
+  animation: ultimateExplosion 0.6s ease-out;
+}
+
+@keyframes ultimateExplosion {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.ultimate-shockwave {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  border: 8px solid;
+  animation: ultimateShockwave 0.8s ease-out;
+}
+
+@keyframes ultimateShockwave {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+.ultimate-particles {
+  position: absolute;
+  inset: -30%;
+}
+
+.ultimate-particle {
+  position: absolute;
+  width: 60px;
+  height: 6px;
+  left: 50%;
+  top: 50%;
+  margin-left: -30px;
+  margin-top: -3px;
+  border-radius: 3px;
+  animation: ultimateParticle 1s ease-out forwards;
+}
+
+@keyframes ultimateParticle {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(150px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .skill-effect * {
+    animation: none !important;
+  }
+}

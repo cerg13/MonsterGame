@@ -1,0 +1,539 @@
+/* Monster Portrait - Premium Visual Component */
+
+.monster-portrait {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.monster-portrait.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Sizes */
+.monster-portrait.size-xs {
+  width: 48px;
+  height: 48px;
+}
+
+.monster-portrait.size-sm {
+  width: 80px;
+  height: 80px;
+}
+
+.monster-portrait.size-md {
+  width: 120px;
+  height: 120px;
+}
+
+.monster-portrait.size-lg {
+  width: 160px;
+  height: 160px;
+}
+
+.monster-portrait.size-xl {
+  width: 240px;
+  height: 240px;
+}
+
+/* Clickable */
+.monster-portrait.clickable {
+  cursor: pointer;
+}
+
+.monster-portrait.clickable:hover {
+  transform: scale(1.05);
+}
+
+.monster-portrait.clickable:active {
+  transform: scale(0.95);
+}
+
+/* Portrait Aura */
+.portrait-aura {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(20px);
+  z-index: 0;
+}
+
+.monster-portrait.animated .portrait-aura {
+  animation: auraBreathing 3s ease-in-out infinite;
+}
+
+@keyframes auraBreathing {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+}
+
+.aura-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: auraPulse 2s ease-out infinite;
+}
+
+@keyframes auraPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.aura-ring {
+  position: absolute;
+  inset: -10%;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.4;
+  animation: ringRotate 10s linear infinite;
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.aura-particles {
+  position: absolute;
+  inset: -30%;
+}
+
+/* Portrait Container */
+.portrait-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4),
+              inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Portrait Visual */
+.portrait-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.portrait-shape {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.shape-layer-1,
+.shape-layer-2,
+.shape-layer-3 {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.shape-layer-1 {
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  animation: shapeFloat 6s ease-in-out infinite;
+}
+
+.shape-layer-2 {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  animation: shapeFloat 8s ease-in-out infinite reverse;
+}
+
+.shape-layer-3 {
+  width: 40%;
+  height: 40%;
+  top: 30%;
+  left: 30%;
+  animation: shapeFloat 10s ease-in-out infinite;
+}
+
+@keyframes shapeFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(5px, -5px) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+/* Element Symbol */
+.element-symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  animation: symbolPulse 3s ease-in-out infinite;
+  z-index: 2;
+}
+
+.monster-portrait.size-xs .element-symbol {
+  font-size: 1.2em;
+}
+
+.monster-portrait.size-sm .element-symbol {
+  font-size: 2em;
+}
+
+.monster-portrait.size-lg .element-symbol {
+  font-size: 4em;
+}
+
+.monster-portrait.size-xl .element-symbol {
+  font-size: 6em;
+}
+
+@keyframes symbolPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.7)) brightness(1.2);
+  }
+}
+
+/* Name Initial */
+.name-initial {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  font-size: 2em;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8),
+               0 0 20px currentColor;
+  z-index: 1;
+}
+
+.monster-portrait.size-xs .name-initial,
+.monster-portrait.size-sm .name-initial {
+  display: none;
+}
+
+/* Pattern Overlay */
+.pattern-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+}
+
+.pattern-overlay.pattern-0 {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.1) 10px,
+    rgba(255, 255, 255, 0.1) 20px
+  );
+}
+
+.pattern-overlay.pattern-1 {
+  background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+}
+
+.pattern-overlay.pattern-2 {
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg 45deg,
+    rgba(255, 255, 255, 0.1) 45deg 90deg
+  );
+}
+
+.pattern-overlay.pattern-3 {
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: patternSlide 3s linear infinite;
+}
+
+.pattern-overlay.pattern-4 {
+  background: radial-gradient(circle, transparent 40%, rgba(255, 255, 255, 0.1) 60%, transparent 80%);
+  animation: patternPulse 2s ease-in-out infinite;
+}
+
+@keyframes patternSlide {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes patternPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Portrait Glow */
+.portrait-glow {
+  position: absolute;
+  inset: -5%;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.monster-portrait:hover .portrait-glow,
+.monster-portrait.animated .portrait-glow {
+  opacity: 0.6;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* Awakened Crown */
+.awakened-crown {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.crown-icon {
+  font-size: 2em;
+  animation: crownFloat 3s ease-in-out infinite;
+  display: block;
+}
+
+.monster-portrait.size-xs .crown-icon,
+.monster-portrait.size-sm .crown-icon {
+  font-size: 1em;
+}
+
+@keyframes crownFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+}
+
+.crown-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  animation: crownShine 3s linear infinite;
+}
+
+@keyframes crownShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Level Badge */
+.level-badge {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 2px 8px;
+  z-index: 10;
+  backdrop-filter: blur(5px);
+}
+
+.level-text {
+  font-size: 0.75em;
+  font-weight: 700;
+  color: #26de81;
+  text-shadow: 0 0 8px #26de81;
+}
+
+.monster-portrait.size-xs .level-badge {
+  display: none;
+}
+
+/* SSR Effects */
+.ssr-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ssr-ring-1,
+.ssr-ring-2 {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid;
+  opacity: 0.6;
+}
+
+.ssr-ring-1 {
+  inset: -5%;
+  animation: ssrRing1 4s linear infinite;
+}
+
+.ssr-ring-2 {
+  inset: -10%;
+  animation: ssrRing2 6s linear infinite reverse;
+}
+
+@keyframes ssrRing1 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ssrRing2 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.ssr-sparkles {
+  position: absolute;
+  inset: -20%;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+  animation: sparkleOrbit 8s linear infinite;
+}
+
+.sparkle:nth-child(1) { top: 0%; left: 50%; }
+.sparkle:nth-child(2) { top: 15%; right: 15%; }
+.sparkle:nth-child(3) { top: 50%; right: 0%; }
+.sparkle:nth-child(4) { bottom: 15%; right: 15%; }
+.sparkle:nth-child(5) { bottom: 0%; left: 50%; }
+.sparkle:nth-child(6) { bottom: 15%; left: 15%; }
+.sparkle:nth-child(7) { top: 50%; left: 0%; }
+.sparkle:nth-child(8) { top: 15%; left: 15%; }
+
+@keyframes sparkleOrbit {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+/* SR Effects */
+.sr-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sr-ring {
+  position: absolute;
+  inset: -5%;
+  border-radius: 50%;
+  border: 2px solid;
+  opacity: 0.5;
+  animation: srPulse 3s ease-in-out infinite;
+}
+
+@keyframes srPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Element Particles */
+.element-particles {
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: particleFloat 4s ease-in-out infinite;
+}
+
+.particle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+.particle:nth-child(3) { bottom: 20%; right: 10%; animation-delay: 1s; }
+.particle:nth-child(4) { bottom: 10%; left: 15%; animation-delay: 1.5s; }
+.particle:nth-child(5) { top: 50%; left: 5%; animation-delay: 2s; }
+.particle:nth-child(6) { top: 50%; right: 5%; animation-delay: 2.5s; }
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .monster-portrait,
+  .portrait-aura,
+  .aura-pulse,
+  .element-symbol,
+  .crown-icon,
+  .ssr-ring-1,
+  .ssr-ring-2,
+  .sparkle,
+  .particle {
+    animation: none;
+  }
+
+  .monster-portrait.clickable:hover {
+    transform: none;
+  }
+}

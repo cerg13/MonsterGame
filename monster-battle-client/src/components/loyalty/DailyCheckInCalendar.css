@@ -1,0 +1,437 @@
+/* Daily Check-In Calendar - Retention System */
+
+.daily-checkin-calendar {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Header */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title-icon {
+  font-size: 24px;
+}
+
+.header-title h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.streak-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(72, 219, 251, 0.1);
+  border: 1px solid rgba(72, 219, 251, 0.3);
+  border-radius: 20px;
+}
+
+.streak-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.streak-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #48dbfb;
+  text-shadow: 0 2px 8px rgba(72, 219, 251, 0.4);
+}
+
+.streak-fire {
+  font-size: 18px;
+  animation: firePulse 1.5s ease infinite;
+}
+
+@keyframes firePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Today's Reward Preview */
+.today-reward-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, rgba(72, 219, 251, 0.15), rgba(69, 170, 242, 0.1));
+  border: 1px solid rgba(72, 219, 251, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(72, 219, 251, 0.2);
+}
+
+.preview-content {
+  flex: 1;
+}
+
+.preview-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+}
+
+.preview-rewards {
+  display: flex;
+  gap: 12px;
+}
+
+.reward-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.reward-item.bonus {
+  background: linear-gradient(135deg, rgba(254, 211, 48, 0.2), rgba(247, 183, 49, 0.1));
+  border: 1px solid rgba(254, 211, 48, 0.3);
+}
+
+.reward-icon {
+  font-size: 16px;
+}
+
+.reward-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.checkin-button {
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #48dbfb, #45aaf2);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(72, 219, 251, 0.3);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.checkin-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(72, 219, 251, 0.5);
+}
+
+.checkin-button:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.checkin-complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: rgba(38, 222, 129, 0.15);
+  border: 1px solid rgba(38, 222, 129, 0.3);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #26de81;
+}
+
+.complete-icon {
+  font-size: 24px;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.calendar-day {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.calendar-day:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Day States */
+.calendar-day.claimed {
+  background: rgba(38, 222, 129, 0.1);
+  border-color: rgba(38, 222, 129, 0.3);
+}
+
+.calendar-day.current {
+  background: linear-gradient(135deg, rgba(72, 219, 251, 0.2), rgba(69, 170, 242, 0.1));
+  border: 2px solid #48dbfb;
+  box-shadow: 0 0 20px rgba(72, 219, 251, 0.4);
+  animation: currentDayGlow 2s ease infinite;
+}
+
+@keyframes currentDayGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(72, 219, 251, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(72, 219, 251, 0.6);
+  }
+}
+
+.calendar-day.upcoming {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-day.locked {
+  opacity: 0.4;
+}
+
+/* Milestone Days */
+.calendar-day.milestone {
+  background: linear-gradient(135deg, rgba(254, 211, 48, 0.15), rgba(247, 183, 49, 0.1));
+  border-color: rgba(254, 211, 48, 0.4);
+}
+
+.calendar-day.milestone.claimed {
+  background: linear-gradient(135deg, rgba(38, 222, 129, 0.15), rgba(32, 191, 107, 0.1));
+  border-color: rgba(38, 222, 129, 0.4);
+}
+
+/* Day Content */
+.day-number {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.milestone-badge {
+  font-size: 14px;
+}
+
+.day-rewards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.reward-lp {
+  font-size: 16px;
+  font-weight: 800;
+  color: #48dbfb;
+}
+
+.reward-bonus {
+  font-size: 20px;
+}
+
+/* Claimed Overlay */
+.day-claimed-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(38, 222, 129, 0.2);
+  border-radius: 12px;
+}
+
+.claimed-check {
+  font-size: 32px;
+  color: #26de81;
+  text-shadow: 0 2px 8px rgba(38, 222, 129, 0.6);
+  animation: checkPop 0.4s ease;
+}
+
+@keyframes checkPop {
+  0% {
+    transform: scale(0) rotate(-180deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Current Day Pulse */
+.day-current-pulse {
+  position: absolute;
+  inset: -2px;
+  border-radius: 12px;
+  background: transparent;
+  border: 2px solid #48dbfb;
+  animation: pulseBorder 2s ease infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseBorder {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+/* Milestone Info */
+.milestone-info {
+  padding: 16px;
+  background: rgba(254, 211, 48, 0.1);
+  border: 1px solid rgba(254, 211, 48, 0.2);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.milestone-info h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fed330;
+  margin: 0 0 12px 0;
+}
+
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.milestone-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.milestone-day {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fed330;
+}
+
+.milestone-reward {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Streak Protection Info */
+.streak-protection-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(252, 92, 101, 0.1);
+  border: 1px solid rgba(252, 92, 101, 0.2);
+  border-radius: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.info-icon {
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .calendar-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .daily-checkin-calendar {
+    padding: 16px;
+  }
+
+  .calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .today-reward-preview {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .checkin-button {
+    width: 100%;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 8px;
+  }
+
+  .calendar-day {
+    padding: 8px;
+  }
+
+  .day-number {
+    font-size: 11px;
+  }
+
+  .reward-lp {
+    font-size: 14px;
+  }
+
+  .reward-bonus {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

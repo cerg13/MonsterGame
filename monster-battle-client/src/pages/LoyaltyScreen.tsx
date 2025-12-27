@@ -14,9 +14,10 @@ import {
 } from '../store/useLoyaltyStore';
 import type { VipLevel, LpShopItem } from '../store/useLoyaltyStore';
 import { usePlayerStore } from '../store';
+import { DailyCheckInCalendar } from '../components/loyalty';
 import './LoyaltyScreen.css';
 
-type TabType = 'overview' | 'shop' | 'history';
+type TabType = 'overview' | 'checkin' | 'shop' | 'history';
 
 export const LoyaltyScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -194,6 +195,12 @@ export const LoyaltyScreen: React.FC = () => {
           Overview
         </button>
         <button
+          className={`tab-button ${activeTab === 'checkin' ? 'active' : ''}`}
+          onClick={() => setActiveTab('checkin')}
+        >
+          📅 Daily Check-In
+        </button>
+        <button
           className={`tab-button ${activeTab === 'shop' ? 'active' : ''}`}
           onClick={() => setActiveTab('shop')}
         >
@@ -319,6 +326,13 @@ export const LoyaltyScreen: React.FC = () => {
                 </button>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Daily Check-In Tab */}
+        {activeTab === 'checkin' && (
+          <div className="checkin-tab">
+            <DailyCheckInCalendar />
           </div>
         )}
 

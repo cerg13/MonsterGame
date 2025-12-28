@@ -15,6 +15,7 @@ import { FilterPanel, type MonsterFilters } from '../components/common/FilterPan
 import { SearchBar } from '../components/common/SearchBar';
 import { MonsterCodex } from '../components/collection';
 import { TeamPresetManager } from '../components/teams';
+import { MonsterQuickActions } from '../components/monsters';
 import type { PlayerMonster } from '../types/player';
 import type { Element } from '../types/monster';
 import './MonstersScreen.css';
@@ -49,7 +50,6 @@ export const MonstersScreen: React.FC = () => {
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const [showFilters, setShowFilters] = useState(false);
   const [selectedMonsters, setSelectedMonsters] = useState<string[]>([]);
-  const [showBatchActions, setShowBatchActions] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
   // Filter and sort monsters
@@ -207,8 +207,22 @@ export const MonstersScreen: React.FC = () => {
   };
 
   const handleBatchLock = () => {
-    selectedMonsters.forEach((id) => toggleMonsterLock(id));
-    setShowBatchActions(false);
+    selectedMonsters.forEach((id) => {
+      const monster = monsters.find(m => m.id === id);
+      if (monster && !monster.locked) {
+        toggleMonsterLock(id);
+      }
+    });
+    deselectAll();
+  };
+
+  const handleBatchUnlock = () => {
+    selectedMonsters.forEach((id) => {
+      const monster = monsters.find(m => m.id === id);
+      if (monster && monster.locked) {
+        toggleMonsterLock(id);
+      }
+    });
     deselectAll();
   };
 
@@ -220,9 +234,13 @@ export const MonstersScreen: React.FC = () => {
           removeMonster(id);
         }
       });
-      setShowBatchActions(false);
       deselectAll();
     }
+  };
+
+  const handleSelectByFilter = (filterFn: (monster: PlayerMonster) => boolean) => {
+    const filtered = sortedMonsters.filter(filterFn);
+    setSelectedMonsters(filtered.map(m => m.id));
   };
 
   const handleDeleteMonster = (monsterId: string) => {
@@ -295,15 +313,6 @@ export const MonstersScreen: React.FC = () => {
           >
             🔍 Filters {Object.values(filters).some((v) => Array.isArray(v) ? v.length > 0 : v !== DEFAULT_FILTERS[v as keyof MonsterFilters]) && '(Active)'}
           </Button>
-          {selectedMonsters.length > 0 && (
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => setShowBatchActions(true)}
-            >
-              Batch ({selectedMonsters.length})
-            </Button>
-          )}
         </div>
         <div className="toolbar-right">
           <select
@@ -339,22 +348,17 @@ export const MonstersScreen: React.FC = () => {
         />
       )}
 
-      {/* Batch Actions Bar */}
-      {selectedMonsters.length > 0 && (
-        <div className="batch-action-bar">
-          <div className="batch-info">
-            {selectedMonsters.length} selected
-          </div>
-          <div className="batch-buttons">
-            <Button variant="ghost" size="sm" onClick={selectAll}>
-              Select All
-            </Button>
-            <Button variant="ghost" size="sm" onClick={deselectAll}>
-              Deselect All
-            </Button>
-          </div>
-        </div>
-      )}
+      {/* Quick Actions Panel */}
+      <MonsterQuickActions
+        selectedMonsters={selectedMonsters}
+        allMonsters={sortedMonsters}
+        onSelectAll={selectAll}
+        onDeselectAll={deselectAll}
+        onSelectByFilter={handleSelectByFilter}
+        onBulkLock={handleBatchLock}
+        onBulkUnlock={handleBatchUnlock}
+        onBulkDelete={handleBatchDelete}
+      />
 
       {/* Monster Grid */}
       <div className="monsters-grid">
@@ -456,25 +460,6 @@ export const MonstersScreen: React.FC = () => {
           })
         )}
       </div>
-
-      {/* Batch Actions Modal */}
-      <Modal
-        isOpen={showBatchActions}
-        onClose={() => setShowBatchActions(false)}
-        title={`Batch Actions (${selectedMonsters.length} selected)`}
-      >
-        <div className="batch-actions-modal">
-          <Button variant="primary" onClick={handleBatchLock}>
-            🔒 Toggle Lock
-          </Button>
-          <Button variant="danger" onClick={handleBatchDelete}>
-            🗑️ Delete Selected (Unlocked only)
-          </Button>
-          <Button variant="ghost" onClick={() => setShowBatchActions(false)}>
-            Cancel
-          </Button>
-        </div>
-      </Modal>
 
       {/* Delete Confirmation Modal */}
       {confirmDelete && (

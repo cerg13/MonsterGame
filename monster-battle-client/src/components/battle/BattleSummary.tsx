@@ -185,13 +185,62 @@ export const BattleSummary: React.FC<BattleSummaryProps> = ({ battleState, onClo
 
   const maxPlayerDamage = Math.max(...statistics.playerStats.map(s => s.damageDealt), 1);
 
+  // Calculate MVP (highest damage dealer)
+  const mvp = statistics.playerStats.length > 0 ? statistics.playerStats[0] : null;
+
+  // Calculate additional stats
+  const playerAlive = statistics.playerStats.filter(s => s.survived).length;
+  const playerTotal = statistics.playerStats.length;
+  const enemiesDefeated = statistics.enemyStats.filter(s => !s.survived).length;
+  const enemyTotal = statistics.enemyStats.length;
+
+  // Damage per turn
+  const damagePerTurn = statistics.totalTurns > 0
+    ? Math.round(statistics.totalDamageDealt / statistics.totalTurns)
+    : 0;
+
+  // Battle efficiency (based on damage dealt vs taken ratio and survival)
+  const efficiencyScore = useMemo(() => {
+    if (statistics.totalDamageTaken === 0) return 100;
+    const damageRatio = statistics.totalDamageDealt / Math.max(statistics.totalDamageTaken, 1);
+    const survivalBonus = (playerAlive / playerTotal) * 20;
+    const speedBonus = Math.max(0, 20 - statistics.totalTurns);
+    return Math.min(100, Math.round(damageRatio * 10 + survivalBonus + speedBonus));
+  }, [statistics, playerAlive, playerTotal]);
+
+  const getEfficiencyGrade = (score: number): { grade: string; color: string } => {
+    if (score >= 90) return { grade: 'S', color: '#ffd700' };
+    if (score >= 75) return { grade: 'A', color: '#1dd1a1' };
+    if (score >= 60) return { grade: 'B', color: '#48dbfb' };
+    if (score >= 45) return { grade: 'C', color: '#feca57' };
+    return { grade: 'D', color: '#ff6b6b' };
+  };
+
+  const { grade, color: gradeColor } = getEfficiencyGrade(efficiencyScore);
+
   return (
     <div className="battle-summary-overlay">
       <div className="battle-summary-panel">
         <div className={`summary-header ${isVictory ? 'victory' : 'defeat'}`}>
           <h2>Battle Summary</h2>
           <div className="battle-outcome">{isVictory ? 'VICTORY' : 'DEFEAT'}</div>
+          <div className="efficiency-grade" style={{ color: gradeColor }}>
+            <span className="grade-label">Grade</span>
+            <span className="grade-value">{grade}</span>
+          </div>
         </div>
+
+        {/* MVP Section */}
+        {mvp && mvp.damageDealt > 0 && (
+          <div className="mvp-section">
+            <div className="mvp-badge">⭐ MVP</div>
+            <div className="mvp-info">
+              <ElementIcon element={mvp.element} />
+              <span className="mvp-name">{mvp.monsterName}</span>
+              <span className="mvp-damage">{formatNumber(mvp.damageDealt)} damage</span>
+            </div>
+          </div>
+        )}
 
         <div className="summary-overview">
           <div className="overview-stat">
@@ -209,6 +258,30 @@ export const BattleSummary: React.FC<BattleSummaryProps> = ({ battleState, onClo
           <div className="overview-stat taken">
             <span className="overview-value">{formatNumber(statistics.totalDamageTaken)}</span>
             <span className="overview-label">Damage Taken</span>
+          </div>
+        </div>
+
+        {/* Extended Stats */}
+        <div className="extended-stats">
+          <div className="extended-stat">
+            <span className="extended-icon">⚔️</span>
+            <span className="extended-value">{formatNumber(damagePerTurn)}</span>
+            <span className="extended-label">Dmg/Turn</span>
+          </div>
+          <div className="extended-stat">
+            <span className="extended-icon">💀</span>
+            <span className="extended-value">{enemiesDefeated}/{enemyTotal}</span>
+            <span className="extended-label">Defeated</span>
+          </div>
+          <div className="extended-stat">
+            <span className="extended-icon">❤️</span>
+            <span className="extended-value">{playerAlive}/{playerTotal}</span>
+            <span className="extended-label">Survived</span>
+          </div>
+          <div className="extended-stat">
+            <span className="extended-icon">📊</span>
+            <span className="extended-value" style={{ color: gradeColor }}>{efficiencyScore}%</span>
+            <span className="extended-label">Efficiency</span>
           </div>
         </div>
 

@@ -24,6 +24,7 @@ import { NotificationProvider } from './contexts/NotificationContext';
 import { NotificationDemo } from './pages/NotificationDemo';
 import { usePlayerStore, useTutorialStore } from './store';
 import { MONSTER_TEMPLATES } from './data/monsters';
+import type { PlayerMonster } from './types/monster';
 import './App.css';
 import './styles/enhanced-theme.css';
 
@@ -82,26 +83,29 @@ function App() {
     if (player && monsters.length === 0) {
       // Give player starter monsters
       const starterTemplateIds = ['fire_imp', 'water_spirit', 'wind_pixie', 'light_fairy'];
-      const starterMonsters = starterTemplateIds.map((templateId, index) => {
+      const starterMonsters: PlayerMonster[] = [];
+
+      starterTemplateIds.forEach((templateId, index) => {
         const template = MONSTER_TEMPLATES.find(t => t.id === templateId);
-        if (!template) return null;
-        return {
-          id: `starter-${index}`,
-          templateId: template.id,
-          ownerId: player.id,
-          level: 20,
-          stars: template.naturalStars,
-          experience: 0,
-          skillLevels: [1, 1, 1],
-          awakened: false,
-          equippedRunes: [],
-          locked: false,
-          obtainedAt: new Date(),
-        };
-      }).filter(Boolean);
+        if (template) {
+          starterMonsters.push({
+            id: `starter-${index}`,
+            templateId: template.id,
+            ownerId: player.id,
+            level: 20,
+            stars: template.naturalStars as number,
+            experience: 0,
+            skillLevels: [1, 1, 1],
+            awakened: false,
+            equippedRunes: [],
+            locked: false,
+            obtainedAt: new Date(),
+          });
+        }
+      });
 
       if (starterMonsters.length > 0) {
-        addMonsters(starterMonsters as any);
+        addMonsters(starterMonsters);
       }
     }
   }, [player, monsters.length, addMonsters]);

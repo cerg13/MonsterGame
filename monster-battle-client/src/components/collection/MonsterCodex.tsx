@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { usePlayerStore } from '../../store';
 import { MONSTER_TEMPLATES } from '../../data/monsters';
-import type { Element, MonsterTemplate } from '../../types/monster';
+import type { Element, MonsterTemplate, PlayerMonster } from '../../types/monster';
 import './MonsterCodex.css';
 
 interface CodexReward {
@@ -29,7 +29,7 @@ export const MonsterCodex: React.FC = () => {
 
     // Get unique template IDs owned by player
     const ownedTemplateIds = new Set(
-      ownedMonsters.map((m: any) => m.templateId)
+      ownedMonsters.map((m: PlayerMonster) => m.templateId)
     );
 
     const collectedCount = ownedTemplateIds.size;
@@ -104,10 +104,12 @@ export const MonsterCodex: React.FC = () => {
 
   // Check if monster was obtained recently (within 24 hours)
   const isNewMonster = (templateId: string): boolean => {
-    const monster = ownedMonsters.find((m: any) => m.templateId === templateId);
+    const monster = ownedMonsters.find((m: PlayerMonster) => m.templateId === templateId);
     if (!monster) return false;
 
-    const obtainedAt = new Date((monster as any).obtainedAt);
+    const obtainedAt = monster.obtainedAt instanceof Date
+      ? monster.obtainedAt
+      : new Date(monster.obtainedAt);
     const now = new Date();
     const hoursSinceObtained = (now.getTime() - obtainedAt.getTime()) / (1000 * 60 * 60);
 

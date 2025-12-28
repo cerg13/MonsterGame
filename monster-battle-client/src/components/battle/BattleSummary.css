@@ -72,6 +72,112 @@
   text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
 }
 
+/* Efficiency Grade */
+.efficiency-grade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.grade-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.grade-value {
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 0 30px currentColor;
+  animation: gradeGlow 2s ease-in-out infinite;
+}
+
+@keyframes gradeGlow {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.9; filter: brightness(1.2); }
+}
+
+/* MVP Section */
+.mvp-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 15px;
+}
+
+.mvp-badge {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.2);
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.mvp-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.mvp-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+.mvp-damage {
+  margin-left: auto;
+  font-size: 14px;
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+/* Extended Stats */
+.extended-stats {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.extended-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.extended-icon {
+  font-size: 18px;
+}
+
+.extended-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+.extended-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Overview stats */
 .summary-overview {
   display: flex;
@@ -301,6 +407,39 @@
 @media (max-width: 600px) {
   .battle-summary-panel {
     padding: 15px;
+  }
+
+  .grade-value {
+    font-size: 36px;
+  }
+
+  .mvp-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .mvp-info {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .mvp-damage {
+    margin-left: 0;
+  }
+
+  .extended-stats {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .extended-stat {
+    flex: 1 1 45%;
+  }
+
+  .extended-value {
+    font-size: 16px;
   }
 
   .stats-header {

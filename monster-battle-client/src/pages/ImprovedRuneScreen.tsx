@@ -52,7 +52,7 @@ export const ImprovedRuneScreen: React.FC = () => {
 
     // Set filter
     if (filters.sets.length > 0) {
-      result = result.filter(r => filters.sets.includes(r.setType as any));
+      result = result.filter(r => (filters.sets as string[]).includes(r.setType));
     }
 
     // Slot filter

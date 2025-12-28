@@ -185,7 +185,7 @@ export const LoyaltyScreen: React.FC = () => {
               />
             </div>
             <div className="vip-progress-text">
-              {totalSpending.toLocaleString()}\u20BD / {vipProgress.required.toLocaleString()}\u20BD to {VIP_LEVELS[nextVipLevel].name}
+              {totalSpending.toLocaleString()} RUB / {vipProgress.required.toLocaleString()} RUB to {VIP_LEVELS[nextVipLevel].name}
             </div>
           </div>
         )}
@@ -251,7 +251,7 @@ export const LoyaltyScreen: React.FC = () => {
               </div>
               <div className="stat-card">
                 <span className="stat-icon">\uD83D\uDCB3</span>
-                <span className="stat-value">{totalSpending.toLocaleString()}\u20BD</span>
+                <span className="stat-value">{totalSpending.toLocaleString()} RUB</span>
                 <span className="stat-label">Total Spending</span>
               </div>
               <div className="stat-card">
@@ -327,13 +327,13 @@ export const LoyaltyScreen: React.FC = () => {
                   \uD83C\uDFE0 Record Visit
                 </button>
                 <button className="test-btn receipt" onClick={() => handleSimulateReceipt(500)}>
-                  \uD83E\uDDFE Receipt 500\u20BD
+                  Receipt 500 RUB
                 </button>
                 <button className="test-btn receipt" onClick={() => handleSimulateReceipt(1000)}>
-                  \uD83E\uDDFE Receipt 1000\u20BD
+                  Receipt 1000 RUB
                 </button>
                 <button className="test-btn receipt" onClick={() => handleSimulateReceipt(2000)}>
-                  \uD83E\uDDFE Receipt 2000\u20BD
+                  Receipt 2000 RUB
                 </button>
               </div>
             </div>

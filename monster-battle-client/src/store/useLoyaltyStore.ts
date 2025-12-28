@@ -221,7 +221,7 @@ export const useLoyaltyStore = create<LoyaltyState>()(
           type: 'receipt',
           receiptAmount: amount,
           lpEarned,
-          description: `Receipt: ${amount.toLocaleString()}₽`,
+          description: `Receipt: ${amount.toLocaleString()} RUB`,
         };
 
         set((state) => ({

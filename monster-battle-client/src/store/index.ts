@@ -1,5 +1,5 @@
 export { usePlayerStore, selectPlayer, selectMonsters, selectRunes } from './usePlayerStore';
-export { useBattleStore, selectBattleState, selectIsInBattle, selectPlayerTeam, selectEnemyTeam, selectDungeonResult, selectDungeonContext } from './useBattleStore';
+export { useBattleStore, selectBattleState, selectIsInBattle, selectPlayerTeam, selectEnemyTeam, selectDungeonResult, selectDungeonContext, selectIsArenaBattle } from './useBattleStore';
 export type { DungeonContext } from './useBattleStore';
 export { useGachaStore, selectCurrentBanner, selectBanners, selectLastPullResult } from './useGachaStore';
 export { useCampaignStore, selectCampaignProgress, selectSelectedRegion, selectSelectedStage, selectTotalStars } from './useCampaignStore';

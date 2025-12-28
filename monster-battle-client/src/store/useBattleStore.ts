@@ -16,6 +16,8 @@ interface BattleStore {
   isLoading: boolean;
   error: string | null;
   battleSpeed: number; // 1 = normal, 2 = fast, 3 = very fast
+  isArenaBattle: boolean; // Track if current battle is arena
+  lastBattleConfig: BattleConfig | null; // Store last battle config for repeat
 
   // Dungeon context
   dungeonContext: DungeonContext | null;
@@ -24,6 +26,7 @@ interface BattleStore {
   // Battle flow
   startBattle: (config: BattleConfig) => void;
   startDungeonBattle: (config: BattleConfig, dungeonContext: DungeonContext) => void;
+  repeatDungeonBattle: () => boolean; // Returns true if repeat started successfully
   submitAction: (action: BattleAction) => void;
   toggleAutoMode: () => void;
   processTick: () => void;
@@ -46,11 +49,13 @@ export const useBattleStore = create<BattleStore>((set, get) => ({
   error: null,
   battleResult: null,
   battleSpeed: 1,
+  isArenaBattle: false,
+  lastBattleConfig: null,
   dungeonContext: null,
   dungeonResult: null,
 
   startBattle: (config) => {
-    set({ isLoading: true, error: null, battleResult: null, dungeonContext: null, dungeonResult: null });
+    set({ isLoading: true, error: null, battleResult: null, dungeonContext: null, dungeonResult: null, isArenaBattle: config.isArena || false });
 
     try {
       // Create new battle engine with state change callback
@@ -74,7 +79,7 @@ export const useBattleStore = create<BattleStore>((set, get) => ({
   },
 
   startDungeonBattle: (config, dungeonContext) => {
-    set({ isLoading: true, error: null, battleResult: null, dungeonContext, dungeonResult: null });
+    set({ isLoading: true, error: null, battleResult: null, dungeonContext, dungeonResult: null, lastBattleConfig: config });
 
     try {
       // Create new battle engine with state change callback
@@ -181,6 +186,23 @@ export const useBattleStore = create<BattleStore>((set, get) => ({
     }
   },
 
+  repeatDungeonBattle: () => {
+    const state = get();
+    const { lastBattleConfig, dungeonContext } = state;
+
+    // Check if we can repeat
+    if (!lastBattleConfig || !dungeonContext) {
+      return false;
+    }
+
+    // Clear current results and start new battle
+    set({ dungeonResult: null, battleResult: null, battleState: null });
+
+    // Start the same battle again
+    get().startDungeonBattle(lastBattleConfig, dungeonContext);
+    return true;
+  },
+
   clearDungeonResult: () => {
     set({ dungeonResult: null, dungeonContext: null });
   },
@@ -206,3 +228,4 @@ export const selectIsAutoMode = (state: BattleStore) => state.battleState?.isAut
 export const selectBattleSpeed = (state: BattleStore) => state.battleSpeed;
 export const selectDungeonContext = (state: BattleStore) => state.dungeonContext;
 export const selectDungeonResult = (state: BattleStore) => state.dungeonResult;
+export const selectIsArenaBattle = (state: BattleStore) => state.isArenaBattle;

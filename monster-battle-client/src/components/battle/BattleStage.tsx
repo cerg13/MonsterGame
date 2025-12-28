@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Application, Container, Graphics, Text, TextStyle } from 'pixi.js';
-import { useBattleStore, selectDungeonResult } from '../../store';
+import { useBattleStore, selectDungeonResult, selectIsArenaBattle } from '../../store';
 import type { BattleAction } from '../../types/battle';
 import { useAudio } from '../../hooks/useAudio';
 import { useAchievementTracker } from '../../hooks/useAchievementTracker';
@@ -68,6 +68,9 @@ export const BattleStage: React.FC<BattleStageProps> = ({
   const clearDungeonResult = useBattleStore((state) => state.clearDungeonResult);
   const endBattle = useBattleStore((state) => state.endBattle);
 
+  // Arena battle tracking
+  const isArenaBattle = useBattleStore(selectIsArenaBattle);
+
   const {
     battleState,
     submitAction,
@@ -129,10 +132,10 @@ export const BattleStage: React.FC<BattleStageProps> = ({
       // Track achievements (only once per battle)
       if (!hasTrackedAchievements.current) {
         hasTrackedAchievements.current = true;
-        trackBattleEnd(battleState, false); // TODO: Pass isArena flag based on battle type
+        trackBattleEnd(battleState, isArenaBattle);
       }
     }
-  }, [battleState?.winner, playBattleVictory, playBattleDefeat, playMusic, stopMusic, battleState, trackBattleEnd]);
+  }, [battleState?.winner, playBattleVictory, playBattleDefeat, playMusic, stopMusic, battleState, trackBattleEnd, isArenaBattle]);
 
   // Show dungeon rewards when dungeon battle ends
   useEffect(() => {
@@ -154,13 +157,21 @@ export const BattleStage: React.FC<BattleStageProps> = ({
   }, [clearDungeonResult, endBattle, navigate]);
 
   // Handle dungeon repeat
+  const repeatDungeonBattle = useBattleStore((state) => state.repeatDungeonBattle);
+
   const handleDungeonRepeat = useCallback(() => {
-    // TODO: Implement auto-repeat logic
     setShowDungeonRewards(false);
-    clearDungeonResult();
-    endBattle();
-    navigate('/dungeons');
-  }, [clearDungeonResult, endBattle, navigate]);
+
+    // Try to repeat the battle
+    const success = repeatDungeonBattle();
+    if (!success) {
+      // If repeat failed, go back to dungeons
+      clearDungeonResult();
+      endBattle();
+      navigate('/dungeons');
+    }
+    // If success, the battle will restart automatically
+  }, [repeatDungeonBattle, clearDungeonResult, endBattle, navigate]);
 
   // Game loop - process ticks to advance ATB bars
   useEffect(() => {

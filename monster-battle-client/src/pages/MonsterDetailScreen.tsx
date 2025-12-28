@@ -7,6 +7,7 @@ import { MAX_LEVEL_BY_STARS } from '../types/monster';
 import { EVOLUTION_REQUIREMENTS, AWAKENING_REQUIREMENTS, ESSENCE_INFO, SKILL_UPGRADE_COSTS, MAX_SKILL_LEVEL } from '../types/evolution';
 import type { PlayerMonster, MonsterTemplate, Element } from '../types/monster';
 import type { PlayerRune } from '../types/player';
+import { RuneOptimizer } from '../components/runes';
 import './MonsterDetailScreen.css';
 
 const elementEmojis: Record<Element, string> = {
@@ -41,10 +42,13 @@ export const MonsterDetailScreen: React.FC = () => {
   const upgradeSkill = usePlayerStore((s) => s.upgradeSkill);
   const addEssence = usePlayerStore((s) => s.addEssence);
   const addDevilmons = usePlayerStore((s) => s.addDevilmons);
+  const equipRune = usePlayerStore((s) => s.equipRune);
+  const unequipRune = usePlayerStore((s) => s.unequipRune);
 
   const [activeTab, setActiveTab] = useState<TabType>('info');
   const [selectedFodder, setSelectedFodder] = useState<string[]>([]);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [showOptimizer, setShowOptimizer] = useState(false);
 
   // Get monster data
   const monster = useMemo(() => monsters.find((m) => m.id === id), [monsters, id]);
@@ -176,6 +180,24 @@ export const MonsterDetailScreen: React.FC = () => {
     addDevilmons(5);
     setMessage({ type: 'success', text: 'Debug materials added!' });
     setTimeout(() => setMessage(null), 2000);
+  };
+
+  const handleEquipRunes = (runeIds: string[]) => {
+    if (!monster) return;
+
+    // First, unequip all current runes
+    equippedRunes.forEach(rune => {
+      unequipRune(rune.id);
+    });
+
+    // Then equip the new runes
+    runeIds.forEach(runeId => {
+      equipRune(runeId, monster.id);
+    });
+
+    setMessage({ type: 'success', text: 'Runes optimized and equipped!' });
+    setTimeout(() => setMessage(null), 2000);
+    setShowOptimizer(false);
   };
 
   return (
@@ -511,15 +533,37 @@ export const MonsterDetailScreen: React.FC = () => {
               })}
             </div>
 
-            <button
-              className="manage-runes-btn"
-              onClick={() => navigate('/runes')}
-            >
-              Manage Runes
-            </button>
+            <div className="rune-actions">
+              <button
+                className="optimize-runes-btn"
+                onClick={() => setShowOptimizer(true)}
+              >
+                🔮 Optimize Runes
+              </button>
+              <button
+                className="manage-runes-btn"
+                onClick={() => navigate('/runes')}
+              >
+                Manage Runes
+              </button>
+            </div>
           </div>
         )}
       </div>
+
+      {/* Rune Optimizer Modal */}
+      {showOptimizer && monster && (
+        <div className="optimizer-overlay" onClick={() => setShowOptimizer(false)}>
+          <div className="optimizer-modal" onClick={(e) => e.stopPropagation()}>
+            <RuneOptimizer
+              monster={monster}
+              allRunes={runes}
+              onEquipRunes={handleEquipRunes}
+              onClose={() => setShowOptimizer(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

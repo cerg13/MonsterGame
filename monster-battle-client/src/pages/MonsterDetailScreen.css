@@ -642,3 +642,84 @@
 .manage-runes-btn:hover {
   box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
 }
+
+/* Rune Actions */
+.rune-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.optimize-runes-btn {
+  flex: 1;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #a55eea, #8e44ad);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(165, 94, 234, 0.3);
+}
+
+.optimize-runes-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(165, 94, 234, 0.5);
+}
+
+/* Optimizer Overlay */
+.optimizer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.optimizer-modal {
+  max-width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .rune-actions {
+    flex-direction: column;
+  }
+
+  .optimizer-modal {
+    max-width: 100%;
+    max-height: 100vh;
+  }
+}

@@ -264,11 +264,25 @@ export const MainMenu: React.FC = () => {
           <GoldIcon size={24} />
           <span className="resource-value gold">{player?.gold ?? 0}</span>
         </div>
-        <div className="resource">
+        <div className="resource energy-resource">
           <EnergyIcon size={24} />
-          <span className="resource-value energy">
-            {player?.energy ?? 0}/{player?.maxEnergy ?? 120}
-          </span>
+          <div className="energy-info">
+            <span className={`resource-value energy ${
+              (player?.energy ?? 0) / (player?.maxEnergy ?? 120) > 0.6 ? 'high' :
+              (player?.energy ?? 0) / (player?.maxEnergy ?? 120) > 0.3 ? 'medium' : 'low'
+            }`}>
+              {player?.energy ?? 0}/{player?.maxEnergy ?? 120}
+            </span>
+            <div className="energy-bar">
+              <div
+                className={`energy-fill ${
+                  (player?.energy ?? 0) / (player?.maxEnergy ?? 120) > 0.6 ? 'high' :
+                  (player?.energy ?? 0) / (player?.maxEnergy ?? 120) > 0.3 ? 'medium' : 'low'
+                }`}
+                style={{ width: `${Math.min(100, ((player?.energy ?? 0) / (player?.maxEnergy ?? 120)) * 100)}%` }}
+              />
+            </div>
+          </div>
         </div>
       </div>
 

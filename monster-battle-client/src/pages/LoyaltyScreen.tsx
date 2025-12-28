@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   useLoyaltyStore,
@@ -15,8 +15,21 @@ import {
 import type { VipLevel, LpShopItem } from '../store/useLoyaltyStore';
 import { usePlayerStore } from '../store';
 import { DailyCheckInCalendar } from '../components/loyalty';
-import { SpinWheel, ScratchCard, Bingo, MemoryMatch } from '../components/minigames';
 import './LoyaltyScreen.css';
+
+// Lazy load mini-games for better performance
+const SpinWheel = lazy(() => import('../components/minigames/SpinWheel').then(m => ({ default: m.SpinWheel })));
+const ScratchCard = lazy(() => import('../components/minigames/ScratchCard').then(m => ({ default: m.ScratchCard })));
+const Bingo = lazy(() => import('../components/minigames/Bingo').then(m => ({ default: m.Bingo })));
+const MemoryMatch = lazy(() => import('../components/minigames/MemoryMatch').then(m => ({ default: m.MemoryMatch })));
+
+// Loading fallback for mini-games
+const MiniGameLoader: React.FC = () => (
+  <div className="minigame-loader">
+    <div className="loader-spinner" />
+    <p>Loading mini-game...</p>
+  </div>
+);
 
 type TabType = 'overview' | 'checkin' | 'shop' | 'history' | 'minigames';
 
@@ -444,8 +457,9 @@ export const LoyaltyScreen: React.FC = () => {
               Play daily mini-games to earn bonus rewards and LP!
             </p>
 
-            <div className="minigames-grid">
-              <SpinWheel
+            <Suspense fallback={<MiniGameLoader />}>
+              <div className="minigames-grid">
+                <SpinWheel
                 lastSpinDate={lastSpinDate}
                 onWin={(prize) => {
                   setLastSpinDate(new Date());
@@ -560,7 +574,8 @@ export const LoyaltyScreen: React.FC = () => {
                   }
                 }}
               />
-            </div>
+              </div>
+            </Suspense>
           </div>
         )}
       </div>
